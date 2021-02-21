@@ -1,0 +1,30 @@
+{
+  "name": "message-in-a-bottle",
+  "version": "1.0.0",
+  "description": "Web app &amp; API to send anonymous messages received by random recipients",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./src/index.js",
+    "pretest": "eslint ./src --fix",
+    "test": "echo \"Tests complete\"",
+    "nodemon": "nodemon ./src/index.js -e js,html,css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/crlimacastro/message-in-a-bottle.git"
+  },
+  "keywords": [],
+  "author": "crlimacastro",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/crlimacastro/message-in-a-bottle/issues"
+  },
+  "homepage": "https://github.com/crlimacastro/message-in-a-bottle#readme",
+  "devDependencies": {
+    "eslint": "^7.20.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
