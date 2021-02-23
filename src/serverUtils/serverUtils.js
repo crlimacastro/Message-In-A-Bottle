@@ -1,19 +1,32 @@
+// Classes
+const File = require('./.classes/file.js');
+const ClientFile = require('./.classes/clientFile.js');
+const Server = require('./.classes/server.js');
+
 // JSON
-const MIMETypes = require('./.jsons/mimetypes.json');
-const extensionToMIME = require('./.jsons/extensionToMIME.json');
+const MIMETYPES = require('./.jsons/mimeTypes.json');
+const EXTENSIONTOMIME = require('./.jsons/extensionToMime.json');
 
 // Utils
-const dirReader = require('./.utils/dirReader.js');
-const fileResponseMaker = require('./.utils/fileResponseMaker.js');
+const fileReader = require('./.utils/fileReader.js');
+const mimeParser = require('./.utils/mimeParser.js');
+const responseMaker = require('./.utils/responseMaker.js');
 const requestParser = require('./.utils/requestParser.js');
-const responseHandler = require('./.utils/responseHandler.js');
+const respond = require('./.utils/respond.js');
 
 module.exports = {
-  MIMETypes,
-  extensionToMIME,
-  // Spread all util methods to serverUtils
-  ...dirReader,
-  ...fileResponseMaker,
+  // Classes
+  File,
+  ClientFile,
+  Server,
+  // JSON
+  MIMETYPES,
+  EXTENSIONTOMIME,
+  // Utils
+  // Spread all util methods straight to serverUtils
+  ...fileReader,
+  ...mimeParser,
+  ...responseMaker,
   ...requestParser,
-  ...responseHandler,
+  ...respond,
 };

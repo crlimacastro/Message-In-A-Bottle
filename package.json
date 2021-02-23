@@ -9,7 +9,7 @@
     "test": "echo \"Tests complete\"",
     "nodemon": "nodemon ./src/index.js -e js,html,css",
     "inspect": "echo \"Now in DEBUG mode. Head to 'chrome://inspect' or 'edge://inspect'\";node --inspect ./src/index.js",
-    "kill3000" : "npx kill-port 3000"
+    "kill3000": "npx kill-port 3000"
   },
   "repository": {
     "type": "git",
@@ -30,6 +30,7 @@
     "nodemon": "^2.0.7"
   },
   "dependencies": {
+    "mime": "^2.5.2",
     "underscore": "^1.12.0"
   }
 }
