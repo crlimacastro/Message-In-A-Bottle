@@ -1,0 +1,17 @@
+{
+    "txt": "PLAINTEXT",
+    "css": "CSS",
+    "html": "HTML",
+    "js": "JS",
+    "json": "JSON",
+    "xml": "XML",
+    "gif": "GIF",
+    "jpg": "JPEG",
+    "jpeg": "JPEG",
+    "jif": "JPEG",
+    "png": "PNG",
+    "svg": "SVG",
+    "ico": "ICO",
+    "wav": "WAV",
+    "mp3": "MP3"
+}

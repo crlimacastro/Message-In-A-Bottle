@@ -1,4 +1,4 @@
-const jokeRandomizer = require('../jokeRandomizer.js');
+const jokeRandomizer = require('./jokeRandomizer.js');
 
 const formatJokeToXML = (json) => `
   <joke>

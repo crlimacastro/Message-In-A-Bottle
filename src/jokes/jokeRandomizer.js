@@ -5,8 +5,9 @@ const getRandomJoke = () => jokes[Math.floor(Math.random() * jokes.length)];
 
 const clamp = (num, min, max) => Math.max(Math.min(num, max), min);
 
-// Returns array of jokes
-// limit: number of jokes to get back
+/**
+ * Returns array of jokes
+ * @param {Number} limit Number of jokes to get back */
 const getRandomJokes = (limit = 1) => {
   let lim = Number(limit); // cast limit to a number
   lim = !lim ? 1 : lim; // set default value to 1

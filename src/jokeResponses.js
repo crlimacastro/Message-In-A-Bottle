@@ -1,8 +1,9 @@
-const serverUtils = require('../serverUtils.js');
-const MIMETypes = require('../mimetypes.json');
+const serverUtils = require('./serverUtils/serverUtils.js');
 
-const jsonHandler = require('./jsonResponses.js');
-const xmlHandler = require('./xmlResponses.js');
+const { MIMETypes } = serverUtils;
+
+const jsonHandler = require('./jokes/jsonResponses.js');
+const xmlHandler = require('./jokes/xmlResponses.js');
 
 const getRandomJokeResponse = (request, response) => {
   const acceptedTypes = serverUtils.getAcceptedTypes(request);

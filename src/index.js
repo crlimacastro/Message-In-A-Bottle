@@ -2,20 +2,26 @@
 const http = require('http');
 
 // Internal modules
-const cssHandler = require('./responses/cssResponses.js');
-const htmlHandler = require('./responses/htmlResponses.js');
-const jokeHandler = require('./responses/jokeResponses.js');
-const serverUtils = require('./serverUtils.js');
+const jokeHandler = require('./jokeResponses.js');
+const serverUtils = require('./serverUtils/serverUtils.js');
 
-// Locally this will be 3000, on Heroku it will be assigned
-const port = process.env.PORT || process.env.NODE_PORT || 3000;
+const { MIMETypes } = serverUtils;
+
+const port = process.env.PORT || process.env.NODE_PORT || 3000; // Locally 3000, assigned on Heroku
+const clientPath = `${__dirname}/../client/`; // path to client folder
+
+// Make 404 response
+const path404 = `${__dirname}/../client/error.html`; // path to 404 page
+const page404 = serverUtils.readFileSync(path404);
+const response404 = serverUtils.makeFileResponse(MIMETypes.HTML, 404, page404);
 
 // Contains all server enpoints
 const urlStruct = {
+  notFound: response404,
   '/random-joke': jokeHandler.getRandomJokeResponse,
   '/random-jokes': jokeHandler.getRandomJokesResponse,
-  '/default-styles.css': cssHandler.getDefaultStyles,
-  notFound: htmlHandler.get404Response,
+  // Spread all endpoints in client
+  ...serverUtils.getFilesResponses(clientPath),
 };
 
 // This is the function that will be called every time a client request comes in
