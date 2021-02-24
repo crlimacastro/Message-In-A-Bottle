@@ -1,7 +1,7 @@
-const serverUtils = require('./serverUtils/serverUtils.js');
+const serverUtils = require('./utils/serverUtils.js');
+const msgResponses = require('./msgResponses.js');
 
 const { Server } = serverUtils;
-const jokesHandler = require('./jokesResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000; // Locally 3000, assigned on Heroku
 
@@ -14,8 +14,7 @@ const path404 = `${__dirname}/../client/error.html`; // path to 404 page
 const urlStruct = {
   notFound: serverUtils.makePathResponse(404, path404),
   '/': serverUtils.makePathResponse(200, pathIndex),
-  '/random-joke': jokesHandler.getRandomJokeResponse,
-  '/random-jokes': jokesHandler.getRandomJokesResponse,
+  ...msgResponses,
   // Spread all endpoints in client
   ...serverUtils.getFilesResponses(pathClient),
 };

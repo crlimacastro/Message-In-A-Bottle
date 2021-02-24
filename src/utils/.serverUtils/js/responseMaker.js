@@ -1,8 +1,6 @@
-// Classes
-const ClientFile = require('../.classes/clientFile.js');
+const fileUtils = require('../../fileUtils.js');
+const { ClientFile } = fileUtils;
 
-// Internal modules
-const fileReader = require('./fileReader.js');
 const responseHandler = require('./respond.js');
 
 /** Returns response function for file */
@@ -22,11 +20,11 @@ const makePathResponse = (statusCode, filepath) => {
 const getFilesResponses = (dirPath) => {
     const urlStruct = {}; // Contains all server enpoints
 
-    const filepaths = fileReader.getFilepathsRecursive(dirPath);
+    const filepaths = fileUtils.getFilepathsRecursive(dirPath);
 
     // Create endpoints and response functions for each file
     filepaths.forEach(filepath => {
-        const endpoint = "/" + encodeURI(fileReader.getCleanPath(fileReader.relativePath(dirPath, filepath)));
+        const endpoint = "/" + encodeURI(fileUtils.getCleanPath(fileUtils.path.relative(dirPath, filepath)));
         const file = new ClientFile(filepath);
 
         // Make endpoint

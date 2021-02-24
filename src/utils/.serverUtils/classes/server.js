@@ -3,8 +3,8 @@ const http = require('http');
 class Server {
     /** Callback that determines server behaviour
      * @callback onRequestCallback
-     * @param {Object} request
-     * @param {Object} response
+     * @param {Object} request: what comes from client to server
+     * @param {Object} response: what is sent back
     */
 
     /** Creates a server

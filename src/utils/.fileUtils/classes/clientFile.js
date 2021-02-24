@@ -14,4 +14,5 @@ class ClientFile extends File {
         this.path = path;
     }
 }
+
 module.exports = ClientFile;

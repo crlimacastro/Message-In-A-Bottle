@@ -1,4 +1,4 @@
-const File = require('../.classes/file.js');
+const { File } = require('../../fileUtils.js');
 
 // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
 // Refactored to an arrow function by ACJ
