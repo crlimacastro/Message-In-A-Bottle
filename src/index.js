@@ -7,7 +7,7 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000; // Locally 3000,
 
 // Important paths
 const pathClient = `${__dirname}/../client/`; // path to client folder
-const pathIndex = `${__dirname}/../client/index.html`; // path to index page
+const pathIndex = `${__dirname}/../client/home.html`; // path to index page
 const path404 = `${__dirname}/../client/error.html`; // path to 404 page
 
 // Contains all server enpoints

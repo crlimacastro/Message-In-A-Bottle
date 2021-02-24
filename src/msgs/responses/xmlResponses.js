@@ -1,5 +1,5 @@
-const msgFetcher = require('./msgFetcher.js');
-const xmlUtils = require('../utils/xmlUtils');
+const msgFetcher = require('../msgFetcher.js');
+const xmlUtils = require('../../utils/xmlUtils.js');
 
 // const formatMsgToXML = (json) => `
 //   <joke>

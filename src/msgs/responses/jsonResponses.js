@@ -1,4 +1,4 @@
-const msgFetcher = require('./msgFetcher.js');
+const msgFetcher = require('../msgFetcher.js');
 
 const getRandomMsg = () => {
   const msg = msgFetcher.getRandomMsg();

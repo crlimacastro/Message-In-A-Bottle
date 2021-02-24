@@ -3,8 +3,8 @@ const serverUtils = require('./utils/serverUtils.js');
 const { MIMETYPES } = serverUtils;
 const { File } = require('./utils/fileUtils.js');
 
-const jsonHandler = require('./msgs/jsonResponses.js');
-const xmlHandler = require('./msgs/xmlResponses.js');
+const jsonHandler = require('./msgs/responses/jsonResponses.js');
+const xmlHandler = require('./msgs/responses/xmlResponses.js');
 
 const respondRandomMsg = (request, response) => {
   const acceptedTypes = serverUtils.getAcceptedTypes(request);
