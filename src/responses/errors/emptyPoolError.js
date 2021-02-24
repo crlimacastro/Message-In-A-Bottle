@@ -1,4 +1,4 @@
-const { APIError } = require('../../utils/serverUtils.js');
+const { APIError } = require('../../utils/apiUtils.js');
 
 class EmptyPoolError extends APIError {
   constructor() {

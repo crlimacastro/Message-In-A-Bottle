@@ -1,8 +1,9 @@
-const { APIJSONResponse } = require('./utils/serverUtils.js');
+const { v4: uuidv4 } = require('uuid'); // UUID generator
 
-class Message extends APIJSONResponse {
+class Message {
   constructor(text) {
-    super();
+    this.created_at = new Date();
+    this.id = uuidv4();
 
     this.text = text;
     this.received = false;

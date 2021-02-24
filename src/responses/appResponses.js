@@ -9,7 +9,7 @@ const { File } = fileUtils;
 const msgPool = require('../msgPool.js');
 
 // Errors
-const EmptyPoolError = require('./errors/emptyPoolError.js');
+const EmptyPoolError = require('./errors/EmptyPoolError.js');
 
 // Functionality
 const getRandomMsg = () => msgPool.popRandom();

@@ -38,13 +38,11 @@ const popRandom = () => {
   return null;
 };
 
-const push = (msg) => {
-  if (msg instanceof Message) {
-    msgPool.push(msg);
-    // TODO: Update msgs file
-  } else {
-    throw new TypeError('msg is not of type Message.');
-  }
+/** Adds a message to the pool */
+const push = (text) => {
+  const msg = new Message(text);
+  msgPool.push(msg);
+  // TODO: Update msgs file
 };
 
 /** Returns how many messages are in the pool. */

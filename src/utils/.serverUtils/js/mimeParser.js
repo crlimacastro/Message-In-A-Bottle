@@ -12,6 +12,5 @@ const getExtension = (filepath) => {
 const getType = (filepath) => MIMETYPES[EXTENSIONTOMIME[getExtension(filepath)]];
 
 module.exports = {
-    getExtension,
     getType,
 };

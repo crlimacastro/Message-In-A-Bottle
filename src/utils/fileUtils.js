@@ -1,8 +1,8 @@
 const fsExtension = require('./.utilsAutomation/fsExtension.js');
 const exportsLoader = require('./.utilsAutomation/exportsLoader.js');
 
-const classDirPath = `${__dirname}/.fileUtils/classes/`;
-const classes = exportsLoader.getExportsRecursive(classDirPath);
+const classPath = `${__dirname}/.fileUtils/classes/`;
+const classes = exportsLoader.getExportsRecursive(classPath);
 const { ClientFile } = classes;
 
 // Source: https://stackoverflow.com/questions/2219526/how-many-bytes-in-a-javascript-string/29955838
@@ -39,9 +39,9 @@ const getFilesRecursive = (dirPath) => {
 };
 
 module.exports = {
+  ...classes,
   ...fsExtension,
   ...exportsLoader,
-  ...classes,
   getBinarySize,
   getFiles,
   getFilesRecursive,

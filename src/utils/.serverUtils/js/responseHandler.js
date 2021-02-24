@@ -1,7 +1,7 @@
 const { File, getBinarySize } = require('../../fileUtils.js');
 
 /** Writes a server response and returns it */
-const respond = async (request, response, statusCode, file) => {
+const respond = (request, response, statusCode, file) => {
   if (file instanceof File) {
     const { method } = request; // Get request method
 
@@ -15,7 +15,7 @@ const respond = async (request, response, statusCode, file) => {
         responseHeaders['Content-Length'] = getBinarySize(file.content);
         response.writeHead(statusCode, responseHeaders); // send response headers
         break;
-      // Default to GET request
+      // Default to GET request (works for POST too)
       default:
         response.writeHead(statusCode, responseHeaders); // send response headers
         response.write(file.content); // send content

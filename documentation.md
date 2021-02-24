@@ -1,3 +1,9 @@
 # Message in a Bottle - Documentation
 
-## EmptyPoolError
+## Errors
+
+### EmptyPoolError
+
+### TextUndefinedError
+
+### RequestMethodError

@@ -1,7 +1,7 @@
 const fileUtils = require('../../fileUtils.js');
-const { ClientFile } = fileUtils;
+const responseHandler = require('./responseHandler.js');
 
-const responseHandler = require('./respond.js');
+const { ClientFile } = fileUtils;
 
 /** Returns response function for file */
 const makeFileResponse = (statusCode, file) => {
