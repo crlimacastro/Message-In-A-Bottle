@@ -36,7 +36,7 @@ const respondRandomMsg = (request, response) => {
   content = JSON.stringify(new EmptyPoolError());
   const type = MIMETYPES.JSON;
   const file = new File(content, type);
-  return serverUtils.respond(request, response, 500, file);
+  return serverUtils.respond(request, response, 500, file); // 500 - Internal Server Error
 };
 
 // Contains endpoints

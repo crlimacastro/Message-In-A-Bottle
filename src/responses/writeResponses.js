@@ -32,7 +32,7 @@ const respondPushMsg = (request, response) => {
       const content = JSON.stringify(new APIError(null, err, null));
       const type = MIMETYPES.JSON;
       const file = new File(content, type);
-      serverUtils.respond(request, response, 400, file);
+      serverUtils.respond(request, response, 400, file); // 400 - Bad Request
     });
 
     request.on('data', (chunk) => {
@@ -47,14 +47,14 @@ const respondPushMsg = (request, response) => {
         const content = JSON.stringify(new TextUndefinedError());
         const type = MIMETYPES.JSON;
         const file = new File(content, type);
-        serverUtils.respond(request, response, 400, file);
+        serverUtils.respond(request, response, 400, file); // 400 - Bad Request
       } else {
         pushMsg(bodyParams.text);
 
         const content = JSON.stringify(new MsgCreatedResponse());
         const type = MIMETYPES.JSON;
         const file = new File(content, type);
-        serverUtils.respond(request, response, 201, file);
+        serverUtils.respond(request, response, 201, file); // 201 - Created
       }
     });
   } else {
