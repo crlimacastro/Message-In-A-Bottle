@@ -1,4 +1,4 @@
-const { APIJSONResponse } = require('../utils/serverUtils.js');
+const { APIJSONResponse } = require('./utils/serverUtils.js');
 
 class Message extends APIJSONResponse {
   constructor(text) {
@@ -10,6 +10,7 @@ class Message extends APIJSONResponse {
 
   flagReceived() {
     this.received = true;
+    this.received_at = new Date();
   }
 }
 

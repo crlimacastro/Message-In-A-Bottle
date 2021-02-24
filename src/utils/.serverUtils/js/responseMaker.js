@@ -6,7 +6,7 @@ const responseHandler = require('./respond.js');
 /** Returns response function for file */
 const makeFileResponse = (statusCode, file) => {
     return (request, response) => {
-        responseHandler.respond(request, response, statusCode, file);
+        return responseHandler.respond(request, response, statusCode, file);
     };
 };
 

@@ -1,5 +1,5 @@
+const fileUtils = require('./utils/fileUtils.js');
 const serverUtils = require('./utils/serverUtils.js');
-const msgResponses = require('./msgResponses.js');
 
 const { Server } = serverUtils;
 
@@ -9,12 +9,16 @@ const port = process.env.PORT || process.env.NODE_PORT || 3000; // Locally 3000,
 const pathClient = `${__dirname}/../client/`; // path to client folder
 const pathIndex = `${__dirname}/../client/home.html`; // path to index page
 const path404 = `${__dirname}/../client/error.html`; // path to 404 page
+const responsesDirPath = `${__dirname}/responses/`;
+
+const responses = fileUtils.getExports(responsesDirPath); // Get responses
 
 // Contains all server enpoints
 const urlStruct = {
   notFound: serverUtils.makePathResponse(404, path404),
   '/': serverUtils.makePathResponse(200, pathIndex),
-  ...msgResponses,
+  // Spread all response endpoints
+  ...responses,
   // Spread all endpoints in client
   ...serverUtils.getFilesResponses(pathClient),
 };
