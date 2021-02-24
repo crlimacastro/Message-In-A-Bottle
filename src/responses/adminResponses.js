@@ -25,6 +25,7 @@ const respondPoolSlice = (request, response) => {
     content = JSON.stringify(content);
     type = MIMETYPES.JSON;
   }
+
   const file = new File(content, type);
   return serverUtils.respond(request, response, 200, file);
 };

@@ -9,13 +9,13 @@ const { msgPool } = msgsJSON;
  * @param {Number} limit Number of messages to get back.
  * @param {Number} offset Index to start from. */
 const peek = (limit = 1, offset = 0) => {
-  let lim = Number(limit); // cast limit to a number
-  lim = mathUtils.clamp(lim, 0, msgPool.length); // clamp between 0 and the length of the array
-  lim = Math.floor(lim); // make sure it is an integer
-
   let i = Number(offset); // cast offset to a number
-  i = mathUtils.clamp(i, 0, msgPool.length - lim); // clamp between 0 until last index remaining
+  i = mathUtils.clamp(i, 0, msgPool.length - 1); // clamp between 0 and array length
   i = Math.floor(i); // make sure it is an integer
+
+  let lim = Number(limit); // cast limit to a number
+  lim = mathUtils.clamp(lim, 0, msgPool.length - i); // clamp between 0 and last index remaining
+  lim = Math.floor(lim); // make sure it is an integer
 
   return msgPool.slice(i, i + lim);
 };
