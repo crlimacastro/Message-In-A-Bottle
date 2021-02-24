@@ -17,7 +17,7 @@ const peek = (limit = 1, offset = 0) => {
   i = mathUtils.clamp(i, 0, msgPool.length - lim); // clamp between 0 until last index remaining
   i = Math.floor(i); // make sure it is an integer
 
-  return msgPool.slice(i, lim);
+  return msgPool.slice(i, i + lim);
 };
 
 /** Returns a random message & removes it from the pool.
