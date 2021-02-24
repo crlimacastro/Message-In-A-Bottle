@@ -1,5 +1,3 @@
-const query = require('querystring');
-
 // Utils
 const fileUtils = require('../utils/fileUtils.js');
 const serverUtils = require('../utils/serverUtils.js');
@@ -40,8 +38,7 @@ const respondPushMsg = (request, response) => {
     });
 
     request.on('end', () => {
-      const bodyString = Buffer.concat(body).toString();
-      const bodyParams = query.parse(bodyString);
+      const bodyParams = serverUtils.getBodyParams(body);
 
       if (!bodyParams.text) {
         const content = JSON.stringify(new TextUndefinedError());
