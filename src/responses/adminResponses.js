@@ -7,7 +7,7 @@ const mathUtils = require('../utils/mathUtils.js');
 const { MIMETYPES } = serverUtils;
 const { File } = fileUtils;
 
-const msgPool = require('../msgPool.js');
+const dataHandler = require('../dataHandler.js');
 
 // API Responses
 const PoolPage = require('./api/PoolPage.js');
@@ -19,10 +19,10 @@ const ParamUndefinedError = require('./errors/ParamUndefinedError.js');
 const getPoolPage = (limit, page) => {
   // Clean limit
   let lim = Number(limit); // cast limit to a number
-  lim = mathUtils.clamp(lim, 1, msgPool.count()); // clamp between 1 and array length
+  lim = mathUtils.clamp(lim, 1, dataHandler.count()); // clamp between 1 and array length
   lim = Math.floor(lim); // make sure it is an integer
 
-  const totalPages = Math.ceil(msgPool.count() / lim); // Get total amount of pages
+  const totalPages = Math.ceil(dataHandler.count() / lim); // Get total amount of pages
 
   // Clean page
   let pg = Number(page); // cast page to a number
@@ -30,7 +30,7 @@ const getPoolPage = (limit, page) => {
   pg = Math.floor(pg); // make sure it is an integer
 
   const offset = lim * pg; // Get peek offset
-  const messages = msgPool.peek(lim, offset); // Get slice of messages
+  const messages = dataHandler.peek(lim, offset); // Get slice of messages
   const pageObj = new PoolPage(messages, totalPages, pg); // Make page obj
   return pageObj;
 };

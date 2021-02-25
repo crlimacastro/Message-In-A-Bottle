@@ -5,7 +5,7 @@ const serverUtils = require('../utils/serverUtils.js');
 const { MIMETYPES } = serverUtils;
 const { File } = fileUtils;
 
-const msgPool = require('../msgPool.js');
+const dataHandler = require('../dataHandler.js');
 
 // Errors
 const APIError = require('../utils/apiUtils.js');
@@ -16,7 +16,7 @@ const ParamUndefinedError = require('./errors/ParamUndefinedError.js');
 const MsgCreatedResponse = require('./api/MsgCreatedResponse.js');
 
 // Functionality
-const pushMsg = (message, topic = null) => msgPool.push(message, topic);
+const pushMsg = (message, topic = null) => dataHandler.push(message, topic);
 
 // Responses
 const respondPushMsg = (request, response) => {

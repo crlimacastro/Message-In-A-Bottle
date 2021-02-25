@@ -17,6 +17,8 @@ const getPathname = (request) => getParsedUrl(request).pathname;
 /** Returns an object with paramaters of query string as properties */
 const getParams = (request) => query.parse(getParsedUrl(request).query);
 
+/** Returns ip address of client that sent the request */
+const getIP = (request) => request.connection.remoteAddress;
 // #endregion
 
 // #region Head data
@@ -34,5 +36,6 @@ module.exports = {
     getParsedUrl,
     getPathname,
     getParams,
+    getIP,
     getAcceptedTypes,
 };

@@ -6,17 +6,18 @@ const xmlUtils = require('../utils/xmlUtils.js');
 const { MIMETYPES } = serverUtils;
 const { File } = fileUtils;
 
-const msgPool = require('../msgPool.js');
+const dataHandler = require('../dataHandler.js');
 
 // Functionality
-const getRandomMsg = (topic) => msgPool.popRandom(topic);
+const getRandomMsg = (userIP, topic) => dataHandler.popRandom(userIP, topic);
 
 // Responses
 const respondRandomMsg = (request, response) => {
   const acceptedTypes = serverUtils.getAcceptedTypes(request);
+  const userIP = serverUtils.getIP(request);
   const params = serverUtils.getParams(request);
 
-  let content = getRandomMsg(params.topic);
+  let content = getRandomMsg(userIP, params.topic);
   if (content) {
     if (acceptedTypes.includes(MIMETYPES.XML)) {
       content = xmlUtils.parseJSONToXML(content);
