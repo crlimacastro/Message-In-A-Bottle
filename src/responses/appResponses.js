@@ -8,9 +8,6 @@ const { File } = fileUtils;
 
 const msgPool = require('../msgPool.js');
 
-// Errors
-const EmptyPoolError = require('./errors/EmptyPoolError.js');
-
 // Functionality
 const getRandomMsg = () => msgPool.popRandom();
 
@@ -33,10 +30,11 @@ const respondRandomMsg = (request, response) => {
     return serverUtils.respond(request, response, 200, file);
   }
 
-  content = JSON.stringify(new EmptyPoolError());
   const type = MIMETYPES.JSON;
-  const file = new File(content, type);
-  return serverUtils.respond(request, response, 500, file); // 500 - Internal Server Error
+  const responseHeaders = { 'Content-Type': type };
+  response.writeHead(204, responseHeaders); // 204 - No Content
+  response.end();
+  return response;
 };
 
 // Contains endpoints

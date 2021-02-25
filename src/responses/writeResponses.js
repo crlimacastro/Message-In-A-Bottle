@@ -10,13 +10,13 @@ const msgPool = require('../msgPool.js');
 // Errors
 const APIError = require('../utils/apiUtils.js');
 const RequestMethodError = require('./errors/RequestMethodError.js');
-const TextUndefinedError = require('./errors/TextUndefinedError.js');
+const ParamUndefinedError = require('./errors/ParamUndefinedError.js');
 
-// JSON Responses
-const MsgCreatedResponse = require('./json/MsgCreatedResponse.js');
+// API Responses
+const MsgCreatedResponse = require('./api/MsgCreatedResponse.js');
 
 // Functionality
-const pushMsg = (text) => msgPool.push(text);
+const pushMsg = (message) => msgPool.push(message);
 
 // Responses
 const respondPushMsg = (request, response) => {
@@ -40,13 +40,13 @@ const respondPushMsg = (request, response) => {
     request.on('end', () => {
       const bodyParams = serverUtils.getBodyParams(body);
 
-      if (!bodyParams.text) {
-        const content = JSON.stringify(new TextUndefinedError());
+      if (!bodyParams.message) {
+        const content = JSON.stringify(new ParamUndefinedError());
         const type = MIMETYPES.JSON;
         const file = new File(content, type);
         serverUtils.respond(request, response, 400, file); // 400 - Bad Request
       } else {
-        pushMsg(bodyParams.text);
+        pushMsg(bodyParams.message);
 
         const content = JSON.stringify(new MsgCreatedResponse());
         const type = MIMETYPES.JSON;

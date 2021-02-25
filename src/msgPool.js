@@ -1,6 +1,6 @@
 const msgsJSON = require('./msgs.json');
 const mathUtils = require('./utils/mathUtils.js');
-const Message = require('./Message.js');
+const MessageResponse = require('./responses/api/MessageResponse.js');
 
 const { msgPool } = msgsJSON;
 
@@ -39,18 +39,18 @@ const popRandom = () => {
 };
 
 /** Adds a message to the pool */
-const push = (text) => {
-  const msg = new Message(text);
-  msgPool.push(msg);
+const push = (message) => {
+  const msgObj = new MessageResponse(message);
+  msgPool.push(msgObj);
   // TODO: Update msgs file
 };
 
 /** Returns how many messages are in the pool. */
-const length = () => msgPool.length();
+const count = () => msgPool.length;
 
 module.exports = {
   peek,
   popRandom,
   push,
-  length,
+  count,
 };

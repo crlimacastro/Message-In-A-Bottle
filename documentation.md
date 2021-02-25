@@ -2,8 +2,6 @@
 
 ## Errors
 
-### EmptyPoolError
-
-### TextUndefinedError
+### ParamUndefinedError
 
 ### RequestMethodError

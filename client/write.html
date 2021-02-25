@@ -5,17 +5,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./src/write/loader.js" type="module"></script>
     <title>Write - Message in a Bottle</title>
 </head>
 
 <body>
     <h1>Message in a Bottle</h1>
 
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="./app.html">App</a></li>
+            <li><a href="./write.html">Write</a></li>
+            <li><a href="./admin.html">Admin</a></li>
+        </ul>
+    </nav>
+
     <section>
-        <form>
-            <input type="text" name="message" id="message">
-            <button type="submit">Submit</button>
+        <form id="formWrite" action="/write-msg" method="POST">
+            <input id="inputMessage" type="text" name="message">
+            <button type="submit" value="Write Msg">Submit</button>
         </form>
+    </section>
+
+    <section id="feedback">
+        <p id="pFeedback">
+
+        </p>
     </section>
 </body>
 

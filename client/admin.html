@@ -5,15 +5,49 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./src/admin/loader.js" type="module"></script>
     <title>Admin - Message in a Bottle</title>
 </head>
 
 <body>
     <h1>Message in a Bottle</h1>
 
-    <!-- shows entire contents of user submitted data API (Read) -->
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="./app.html">App</a></li>
+            <li><a href="./write.html">Write</a></li>
+            <li><a href="./admin.html">Admin</a></li>
+        </ul>
+    </nav>
 
-    <!-- calls and displays /get-suggestions?sort=latest -->
+    <section id="controls">
+        <label for="limit">Amount:</label>
+        <select name="limit" id="limit">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100">100</option>
+        </select>
+        <button id="btnGetAllMsgs">Show Pooled Messages</button>
+    </section>
+
+    <section id="content">
+        <nav id="navPagination">
+
+        </nav>
+        <ul id="ulMessages">
+
+        </ul>
+    </section>
+
+    <section id="feedback">
+        <p id="pFeedback">
+
+        </p>
+    </section>
 </body>
 
 </html>
