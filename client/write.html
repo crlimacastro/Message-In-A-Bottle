@@ -13,17 +13,22 @@
     <h1>Message in a Bottle</h1>
 
     <nav>
-        <ul>
-            <li><a href="/">Home</a></li>
-            <li><a href="./app.html">App</a></li>
-            <li><a href="./write.html">Write</a></li>
-            <li><a href="./admin.html">Admin</a></li>
-        </ul>
+        <a href="/">Home</a>
+        <a href="./app.html">App</a>
+        <a href="./write.html">Write</a>
+        <a href="./admin.html">Admin</a>
     </nav>
 
-    <section>
+    <section id="controls">
         <form id="formWrite" action="/write-msg" method="POST">
-            <input id="inputMessage" type="text" name="message">
+            <div>
+                <label for="message">Cast a message out to sea:</label>
+                <input id="inputMessage" type="text" name="message">
+            </div>
+            <div>
+                <label for="topic">Topic (Optional):</label>
+                <input id="inputTopic" type="text" name="topic">
+            </div>
             <button type="submit" value="Write Msg">Submit</button>
         </form>
     </section>

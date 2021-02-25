@@ -9,13 +9,14 @@ const { File } = fileUtils;
 const msgPool = require('../msgPool.js');
 
 // Functionality
-const getRandomMsg = () => msgPool.popRandom();
+const getRandomMsg = (topic) => msgPool.popRandom(topic);
 
 // Responses
 const respondRandomMsg = (request, response) => {
   const acceptedTypes = serverUtils.getAcceptedTypes(request);
+  const params = serverUtils.getParams(request);
 
-  let content = getRandomMsg();
+  let content = getRandomMsg(params.topic);
   if (content) {
     if (acceptedTypes.includes(MIMETYPES.XML)) {
       content = xmlUtils.parseJSONToXML(content);

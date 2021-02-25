@@ -2,7 +2,7 @@ const msgsJSON = require('./msgs.json');
 const mathUtils = require('./utils/mathUtils.js');
 const MessageResponse = require('./responses/api/MessageResponse.js');
 
-const { msgPool } = msgsJSON;
+const { msgPool, topics } = msgsJSON;
 
 /**
  * Returns a number of saved messages in msgs file.
@@ -20,28 +20,90 @@ const peek = (limit = 1, offset = 0) => {
   return msgPool.slice(i, i + lim);
 };
 
-/** Returns a random message & removes it from the pool.
- *  Returns null if empty. */
-const popRandom = () => {
-  if (msgPool.length > 0) {
-    // Get random message
-    const i = Math.floor(Math.random() * msgPool.length);
-    const msg = msgPool[i];
+/** Helper function to retrieve random element from array */
+const fetchRandomMsg = (arr) => {
+  if (arr) {
+    const i = Math.floor(Math.random() * arr.length);
+    const msg = arr[i];
+    arr.splice(i, 1); // Remove msg from array
+    msg.flagReceived(); // Flag as received
 
-    msgPool.splice(i, 1); // Remove msg from array
     // TODO: Update msgs file
 
-    msg.flagReceived(); // Flag as received
     return msg;
   }
 
   return null;
 };
 
+/** Returns a random message & removes it from the pool.
+ *  Returns null if empty. */
+const popRandom = (topic = null) => {
+  const t = topic ? topic.toLowerCase() : null;
+
+  if (msgPool.length > 0) {
+    // If a topic was specified
+    if (t) {
+      // If the topic exists
+      if (topics[t]) {
+        const msgObj = fetchRandomMsg(topics[t]);
+
+        // If topic is empty delete it
+        if (topics[msgObj.topic].length === 0) {
+          delete topics[msgObj.topic];
+        }
+
+        // Remove it from public pool as well
+        const i = msgPool.findIndex((m) => m.id === msgObj.id);
+        msgPool.splice(i, 1);
+
+        return msgObj;
+      }
+
+      // If the topic didn't exist, return null
+      return null;
+    }
+    // Topic == null
+    const msgObj = fetchRandomMsg(msgPool);
+
+    // If this randomly retrieved msg has a topic
+    if (msgObj.topic) {
+      // Remove it from topic as well
+      const i = topics[msgObj.topic].findIndex((m) => m.id === msgObj.id);
+      topics[msgObj.topic].splice(i, 1);
+
+      // If topic is empty delete it
+      if (topics[msgObj.topic].length === 0) {
+        delete topics[msgObj.topic];
+      }
+    }
+
+    return msgObj;
+  }
+
+  return null;
+};
+
 /** Adds a message to the pool */
-const push = (message) => {
-  const msgObj = new MessageResponse(message);
+const push = (message, topic = null) => {
+  const t = topic ? topic.toLowerCase() : null;
+
+  const msgObj = new MessageResponse(message, t);
+
+  // Add it to public pool
   msgPool.push(msgObj);
+
+  // Add it to topic pool
+  if (t) {
+    if (topics[t]) {
+      // If topic exists, push message to it
+      topics[t].push(msgObj);
+    } else {
+      // Create array if first message in topic
+      topics[t] = [msgObj];
+    }
+  }
+
   // TODO: Update msgs file
 };
 

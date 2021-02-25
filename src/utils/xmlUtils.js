@@ -6,7 +6,11 @@ const getKeysAsXML = (json) => {
   let xml = '';
   const keys = Object.keys(json);
   keys.forEach((key) => {
-    xml += `<${key}>${json[key]}</${key}>`;
+    if (Object.keys(json[key])) {
+      getKeysAsXML(json[key]);
+    } else {
+      xml += `<${key}>${json[key]}</${key}>`;
+    }
   });
   return xml;
 };

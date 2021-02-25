@@ -1,10 +1,11 @@
 const { APIJSONResponse } = require('../../utils/apiUtils.js');
 
 class MessageResponse extends APIJSONResponse {
-  constructor(message) {
+  constructor(message, topic = null) {
     super();
 
     this.message = message;
+    this.topic = topic;
     this.received = false;
   }
 

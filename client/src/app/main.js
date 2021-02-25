@@ -1,12 +1,14 @@
 import * as ajax from '../ajax.js';
 
 const init = () => {
+    // DOM Elements
+    const inputTopic = document.querySelector("#inputTopic");
     const btnGetMessage = document.querySelector("#btnGetMessage");
     const pMessage = document.querySelector("#pMessage");
     const pFeedback = document.querySelector("#pFeedback");
 
     btnGetMessage.onclick = () => {
-        ajax.sendGETRequest('/random-msg', (e) => {
+        ajax.sendGETRequest(`/random-msg?topic=${inputTopic.value}`, e => {
             const xhr = e.target;
 
             switch (xhr.status) {

@@ -22,7 +22,7 @@ const getPoolPage = (limit, page) => {
   lim = mathUtils.clamp(lim, 1, msgPool.count()); // clamp between 1 and array length
   lim = Math.floor(lim); // make sure it is an integer
 
-  const totalPages = msgPool.count() / lim; // Get total amount of pages
+  const totalPages = Math.ceil(msgPool.count() / lim); // Get total amount of pages
 
   // Clean page
   let pg = Number(page); // cast page to a number

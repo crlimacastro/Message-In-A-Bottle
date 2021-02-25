@@ -1,9 +1,12 @@
 import * as ajax from '../ajax.js';
 
 const init = () => {
+    // DOM Elements
     const formWrite = document.querySelector("#formWrite");
     const inputMessage = document.querySelector("#inputMessage");
+    const inputTopic = document.querySelector("#inputTopic");
     const pFeedback = document.querySelector("#pFeedback");
+    
     formWrite.onsubmit = (e) => {
         ajax.sendFormRequest(e, (e) => {
             const xhr = e.target;
@@ -12,6 +15,7 @@ const init = () => {
             switch (xhr.status) {
                 case 201: // Created
                     inputMessage.value = ''; // Clear text input
+                    inputTopic.value = '';
                     pFeedback.innerHTML = response.message;
                     break;
                 case 400: // Bad Request

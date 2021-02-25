@@ -16,7 +16,7 @@ const ParamUndefinedError = require('./errors/ParamUndefinedError.js');
 const MsgCreatedResponse = require('./api/MsgCreatedResponse.js');
 
 // Functionality
-const pushMsg = (message) => msgPool.push(message);
+const pushMsg = (message, topic = null) => msgPool.push(message, topic);
 
 // Responses
 const respondPushMsg = (request, response) => {
@@ -46,7 +46,7 @@ const respondPushMsg = (request, response) => {
         const file = new File(content, type);
         serverUtils.respond(request, response, 400, file); // 400 - Bad Request
       } else {
-        pushMsg(bodyParams.message);
+        pushMsg(bodyParams.message, bodyParams.topic);
 
         const content = JSON.stringify(new MsgCreatedResponse());
         const type = MIMETYPES.JSON;
