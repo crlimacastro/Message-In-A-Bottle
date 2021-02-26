@@ -1,6 +1,6 @@
 const savedData = require('./savedData.json');
 const mathUtils = require('./utils/mathUtils.js');
-const MessageResponse = require('./responses/api/MessageResponse.js');
+const MessageResponse = require('./api/jsonResponses/MessageResponse.js');
 
 const {
   msgPool, // Public pool with all messages
@@ -147,6 +147,18 @@ const popRandom = (userIP, topic = null) => {
   return null;
 };
 
+/** Returns messages received by a user */
+const getReceivedMessages = (userIP) => {
+  const user = users[userIP];
+
+  // If that user was found
+  if (user) {
+    return user;
+  }
+
+  return null;
+};
+
 /** Adds a message to the pool */
 const push = (message, topic = null) => {
   createMsg(message, topic);
@@ -159,6 +171,7 @@ const push = (message, topic = null) => {
 module.exports = {
   peek,
   popRandom,
+  getReceivedMessages,
   push,
   count,
 };
