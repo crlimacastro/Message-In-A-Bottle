@@ -5,37 +5,41 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <script src="./src/app/loader.js" type="module"></script>
     <title>App - Message in a Bottle</title>
 </head>
 
 <body>
-    <h1>Message in a Bottle</h1>
+    <header>
+        <div>
+            <a href="/"><img src="./media/logo-small.png" alt=""></a>
+            <h1>Message in a Bottle</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="./app.html">App</a>
+            <a href="./write.html">Write</a>
+            <a href="./admin.html">Admin</a>
+        </nav>
+    </header>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="./app.html">App</a>
-        <a href="./write.html">Write</a>
-        <a href="./admin.html">Admin</a>
-    </nav>
+    <p>Fish for messages at sea.</p>
 
     <section id="controls">
         <div>
-            <div>
-                <label for="topic">Topic (Optional):</label>
-                <input id="inputTopic" type="text" name="topic">
-            </div>
+            <label for="topic">Topic (Optional):</label>
+            <input id="inputTopic" type="text" name="topic">
             <button id="btnGetMessage">Fish Bottled Message</button>
         </div>
-        
-        <div>
-            <button id="btnGetReceivedMsgs">Show Received Messages</button>
+
+        <button id="btnGetReceivedMsgs">Show Received Messages</button>
         </div>
     </section>
 
     <section id="content">
         <div id="msgContainer">
-            
+
         </div>
         <ul id="ulMessages">
 
@@ -47,7 +51,6 @@
 
         </p>
     </section>
-
 </body>
 
 </html>

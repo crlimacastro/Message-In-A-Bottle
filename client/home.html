@@ -5,19 +5,69 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/favicon.png" type="image/png">
     <title>Home - Message in a Bottle</title>
 </head>
 
 <body>
-    <h1>Message in a Bottle</h1>
+    <header>
+        <div>
+            <a href="/"><img src="./media/logo-small.png" alt=""></a>
+            <h1>Message in a Bottle</h1>
+        </div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="./app.html">App</a>
+            <a href="./write.html">Write</a>
+            <a href="./admin.html">Admin</a>
+        </nav>
+    </header>
 
-    <nav>
-        <a href="/">Home</a>
-        <a href="./app.html">App</a>
-        <a href="./write.html">Write</a>
-        <a href="./admin.html">Admin</a>
-    </nav>
+    <h2>Users</h2>
+    <section>
+        <div>
+            <a href="./app.html">
+                <h3>App</h3>
+                <img src="./media/logo-outline.png" alt="">
+            </a>
 
+            <p>Head to the app and fish for messages sent adrift by someone you will never know.</p>
+        </div>
+
+        <div>
+            <a href="./write.html">
+                <h3>Write</h3>
+                <img src="./media/quill-outline.png" alt="image here">
+            </a>
+
+            <p>
+                Write some kind words for a stranger who might need them.
+                Pour your creativity into a haiku.
+                Cast a message out to sea.
+            </p>
+        </div>
+    </section>
+
+    <h2>Developers</h2>
+    <section>
+        <p>If you would like to use the REST API behind this web app, here are some common endpoints:</p>
+
+        <ul>
+            <li><a href="/msg-random">/msg-random</a></li>
+            <li><a href="/msg-random?topic=haiku">/msg-random?topic=haiku</a></li>
+        </ul>
+
+        <p>
+            Head to the <a
+                href="https://github.com/crlimacastro/crl3554-430-project-1/blob/main/documentation.md">documentation</a>
+            for further information.
+        </p>
+    </section>
+
+    <h2>Administrator</h2>
+    <section>
+        <p>Proceed to the <a href="./admin.html">Admin</a> page to view and edit data.</p>
+    </section>
     <!-- describe API -->
 
     <!-- link to documentation on Github -->

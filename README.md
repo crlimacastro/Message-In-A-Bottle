@@ -3,6 +3,10 @@ Web app &amp; API to send anonymous messages received by random recipients
 
 ## Purpose
 
+[What my site does and its purpose]
+
+[What part of your app does the API handle]
+
 ## What went right &amp; what went wrong
 
 ## Future improvements
@@ -17,9 +21,13 @@ backend framework
 
 automation of endpoints
 
-automation of utility libraries
-
 ## Sources
+
+Favicon: https://www.flaticon.com/free-icon/message-in-a-bottle_3142421
+
+Quill and ink: https://www.flaticon.com/free-icon/quill-pen_4150743?related_id=4150743&origin=search
+
+### Code
 
 https://coderrocketfuel.com/article/recursively-list-all-the-files-in-a-directory-using-node-js */
 
