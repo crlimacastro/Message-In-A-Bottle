@@ -20,16 +20,26 @@
     </nav>
 
     <section id="controls">
-        <label for="limit">Amount:</label>
-        <select name="limit" id="limit">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="20">20</option>
-            <option value="25">25</option>
-            <option value="50">50</option>
-            <option value="100">100</option>
-        </select>
-        <button id="btnGetAllMsgs">Show Pooled Messages</button>
+        <div>
+            <label for="limit">Amount:</label>
+            <select name="limit" id="limit">
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
+                <option value="50">50</option>
+                <option value="100">100</option>
+            </select>
+            <button id="btnGetAllMsgs">Show Pooled Messages</button>
+        </div>
+
+        <button id="btnClearPool">Clear Pool</button>
+
+        <nav id="navPagination">
+            <button id="btnPreviousPage">&lt&lt Previous Page</button>
+            <span id="spanPageInfo">0/0</span>
+            <button id="btnNextPage">Next Page &gt&gt</button>
+        </nav>
     </section>
 
     <section id="content">

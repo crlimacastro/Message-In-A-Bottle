@@ -1,46 +1,44 @@
 import * as ajax from '../ajax.js';
+import * as msgMaker from '../msgMaker.js';
+
+// Clears all client outputs and feedback
+const clearOutputs = () => {
+    msgContainer.innerHTML = '';
+    ulMessages.innerHTML = '';
+    pFeedback.innerHTML = '';
+};
+
+/** Updates ul element with list of msgs */
+const updateUlMessages = (messages) => {
+    ulMessages.innerHTML = ''; // Clear ul
+
+    for (const msg of messages) {
+        ulMessages.appendChild(msgMaker.makeMsg(msg));
+    }
+};
 
 const init = () => {
     // DOM Elements
-    const inputTopic = document.querySelector("#inputTopic");
-    const btnGetMessage = document.querySelector("#btnGetMessage");
-    const btnGetReceivedMsgs = document.querySelector("#btnGetReceivedMsgs");
-    const pMessage = document.querySelector("#pMessage");
-    const ulMessages = document.querySelector("#ulMessages");
-    const pFeedback = document.querySelector("#pFeedback");
-
-    /** Updates ul element with fetched response data */
-    const updateUlMessages = (response) => {
-        ulMessages.innerHTML = ''; // Clear ul 
-        const messages = Object.values(response);
-
-        for (const msg of messages) {
-            // Create DOM Elements
-            const pMessage = document.createElement("p");
-            pMessage.innerHTML = `Message: ${msg.message}`;
-            const pTopic = document.createElement("p");
-            pTopic.innerHTML = `Topic: ${msg.topic}`;
-            const pCreatedAt = document.createElement("p");
-            pCreatedAt.innerHTML = `Created at: ${new Date(msg.created_at).toGMTString()}`;
-            const divElement = document.createElement("div");
-            divElement.classList.add('message');
-
-            // Update the DOM
-            divElement.appendChild(pMessage);
-            divElement.appendChild(pTopic);
-            divElement.appendChild(pCreatedAt);
-            ulMessages.appendChild(divElement);
-        }
-    };
+    // Controls
+    const inputTopic = document.querySelector('#inputTopic');
+    const btnGetMessage = document.querySelector('#btnGetMessage');
+    const btnGetReceivedMsgs = document.querySelector('#btnGetReceivedMsgs');
+    // Output
+    const msgContainer = document.querySelector('#msgContainer');
+    const ulMessages = document.querySelector('#ulMessages');
+    const pFeedback = document.querySelector('#pFeedback');
 
     btnGetMessage.onclick = () => {
         ajax.sendGETRequest(`/msg-random?topic=${inputTopic.value}`, e => {
+            clearOutputs();
+
             const xhr = e.target;
 
             switch (xhr.status) {
                 case 200: // OK
-                    const response = JSON.parse(xhr.response);
-                    pMessage.innerHTML = response.message;
+                    const msg = JSON.parse(xhr.response);
+                    msgContainer.innerHTML = ''; // Clear container
+                    msgContainer.appendChild(msgMaker.makeMsgLite(msg));
                     break;
                 case 204: // No Content
                     if (inputTopic.value === '') {
@@ -59,6 +57,8 @@ const init = () => {
 
     btnGetReceivedMsgs.onclick = () => {
         ajax.sendGETRequest('/msg-received', e => {
+            clearOutputs();
+
             const xhr = e.target;
 
             switch (xhr.status) {
@@ -68,7 +68,7 @@ const init = () => {
 
                     // If pool is not empty
                     if (messages.length > 0) {
-                        updateUlMessages(response);
+                        updateUlMessages(messages);
                     }
                     break;
                 case 204: // No Content

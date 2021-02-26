@@ -32,7 +32,16 @@ const sendFormRequest = (e, callback) => {
     return false;
 };
 
+const sendDELETERequest = (url, callback) => {
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', url);
+    xhr.setRequestHeader('Accept', 'application/json');
+    xhr.onload = callback;
+    xhr.send();
+};
+
 export {
     sendGETRequest,
     sendFormRequest,
+    sendDELETERequest,
 };
