@@ -32,8 +32,14 @@ const getQueryParams = (request) => query.parse(getParsedUrl(request).query);
  */
 const getBodyParams = (body) => query.parse(Buffer.concat(body).toString());
 
-/** Returns ip address of client that sent the request */
-const getIP = (request) => request.connection.remoteAddress;
+/**
+ * Returns ip address of client that sent the request
+ * https://www.semicolonworld.com/question/44499/how-to-determine-a-user-39-s-ip-address-in-node
+ */
+const getIP = (request) => request.headers['x-forwarded-for']
+    || request.connection.remoteAddress
+    || request.socket.remoteAddress
+    || request.connection.socket.remoteAddress.split(',')[0];
 
 // #region Headers Parse
 

@@ -1,28 +1,21 @@
 // Utils
-const fileUtils = require('../../utils/fileUtils');
 const serverUtils = require('../../utils/serverUtils');
-const xmlUtils = require('../../utils/xmlUtils');
 const mathUtils = require('../../utils/mathUtils');
+const apiUtils = require('../../utils/apiUtils');
 
-const dataHandler = require('../../dataHandler.js');
+const jsonResponses = require('../jsonResponses');
+const errors = require('../errors');
 
-const { ResponseFile } = fileUtils;
-const { MIMETYPES } = serverUtils;
-
-// API Responses
-const PoolPageResponse = require('../jsonResponses/PoolPageResponse.js');
-
-// Errors
-const ParamUndefinedError = require('../errors/ParamUndefinedError.js');
+const poolsHandler = require('../poolsHandler.js');
 
 // Functionality
 const getPoolPage = (limit, page) => {
   // Clean limit
   let lim = Number(limit); // cast limit to a number
-  lim = mathUtils.clamp(lim, 1, dataHandler.count()); // clamp between 1 and array length
+  lim = mathUtils.clamp(lim, 1, poolsHandler.mainCount()); // clamp between 1 and array length
   lim = Math.floor(lim); // make sure it is an integer
 
-  const totalPages = Math.ceil(dataHandler.count() / lim); // Get total amount of pages
+  const totalPages = Math.ceil(poolsHandler.mainCount() / lim); // Get total amount of pages
 
   // Clean page
   let pg = Number(page); // cast page to a number
@@ -30,40 +23,75 @@ const getPoolPage = (limit, page) => {
   pg = Math.floor(pg); // make sure it is an integer
 
   const offset = lim * pg; // Get peek offset
-  const messages = dataHandler.peek(lim, offset); // Get slice of messages
-  const pageObj = new PoolPageResponse(messages, totalPages, pg); // Make page obj
+  const messages = poolsHandler.peek(lim, offset); // Get slice of messages
+  const pageObj = new jsonResponses.PoolPageResponse(messages, totalPages, pg); // Make page obj
   return pageObj;
+};
+
+const poolDeleteMsg = (id) => poolsHandler.deleteMsg(id);
+
+const clearPool = () => {
+  poolsHandler.clear();
 };
 
 // Responses
 const respondPoolPage = (request, response) => {
-  const acceptedTypes = serverUtils.getAcceptedTypes(request);
   const params = serverUtils.getQueryParams(request);
 
   if (!params.limit || !params.page) {
-    const content = JSON.stringify(new ParamUndefinedError());
-    const type = MIMETYPES.JSON;
-    const file = new ResponseFile(content, type);
-    return serverUtils.respond(request, response, 400, file); // 400 - Bad Request
+    // 400 - Bad Request
+    return apiUtils.respondAPIContent(request, response, 400, new errors.ParamUndefinedError());
   }
 
-  let content = getPoolPage(params.limit, params.page);
-  let type;
-  if (acceptedTypes.includes(MIMETYPES.XML)) {
-    content = xmlUtils.parseJSONToXML(content);
-    type = MIMETYPES.XML;
-  } else {
-    content = JSON.stringify(content);
-    type = MIMETYPES.JSON;
-  }
+  const content = getPoolPage(params.limit, params.page);
+  return apiUtils.respondAPIContent(request, response, 200, content);
+};
 
-  const file = new ResponseFile(content, type);
-  return serverUtils.respond(request, response, 200, file);
+const respondPoolDelete = (request, response) => {
+  switch (request.method) {
+    case 'DELETE': {
+      const params = serverUtils.getQueryParams(request);
+
+      if (!params.id) {
+        // 400 - Bad Request
+        return apiUtils.respondAPIContent(request, response, 400, new errors.ParamUndefinedError());
+      }
+
+      const deletedMsg = poolDeleteMsg(params.id);
+
+      // If a msg was actually delted (null otherwise)
+      if (deletedMsg) {
+        // 200 - OK
+        return apiUtils.respondAPIContent(request, response, 200,
+          new jsonResponses.MsgDeletedResponse());
+      }
+
+      // 204 - No Content
+      return serverUtils.respondNoContent(request, response);
+    }
+    default:
+      // 405 - Method Not Allowed
+      return apiUtils.respondAPIContent(request, response, 405, new errors.RequestMethodError());
+  }
+};
+
+const respondPoolClear = (request, response) => {
+  switch (request.method) {
+    case 'DELETE':
+      clearPool();
+      return apiUtils.respondAPIContent(request, response, 200,
+        new jsonResponses.PoolClearedResponse());
+    default:
+      // 405 - Method Not Allowed
+      return apiUtils.respondAPIContent(request, response, 405, new errors.RequestMethodError());
+  }
 };
 
 // Contains endpoints
 const urlResponses = {
   '/pool': respondPoolPage,
+  '/pool-delete': respondPoolDelete,
+  '/pool-clear': respondPoolClear,
 };
 
 module.exports = urlResponses;

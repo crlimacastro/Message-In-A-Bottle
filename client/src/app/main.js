@@ -34,7 +34,7 @@ const init = () => {
     };
 
     btnGetMessage.onclick = () => {
-        ajax.sendGETRequest(`/random-msg?topic=${inputTopic.value}`, e => {
+        ajax.sendGETRequest(`/msg-random?topic=${inputTopic.value}`, e => {
             const xhr = e.target;
 
             switch (xhr.status) {
@@ -43,7 +43,12 @@ const init = () => {
                     pMessage.innerHTML = response.message;
                     break;
                 case 204: // No Content
-                    pFeedback.innerHTML = 'There are currently no messages out at sea. Check back later or write your own.';
+                    if (inputTopic.value === '') {
+                        pFeedback.innerHTML = 'There are currently no messages out at sea. Check back later or write your own.';
+                    }
+                    else {
+                        pFeedback.innerHTML = 'There are no messages in this topic.';
+                    }
                     break;
                 default:
                     pFeedback.innerHTML = 'Status Code not handled by client';
@@ -53,7 +58,7 @@ const init = () => {
     };
 
     btnGetReceivedMsgs.onclick = () => {
-        ajax.sendGETRequest('/received-msgs', e => {
+        ajax.sendGETRequest('/msg-received', e => {
             const xhr = e.target;
 
             switch (xhr.status) {

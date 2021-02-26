@@ -40,6 +40,18 @@ const respond = (request, response, statusCode, file) => {
   throw new TypeError('file is not of type File.');
 };
 
+/**
+ * Responds with 204 - No Content and sends nothing back
+ * @param {Request} request
+ * @param {Response} response
+ */
+const respondNoContent = (request, response) => {
+  response.writeHead(204, {}); // 204 - No Content
+  response.end();
+  return response;
+};
+
 module.exports = {
   respond,
+  respondNoContent,
 };

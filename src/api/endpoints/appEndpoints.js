@@ -1,75 +1,55 @@
 // Utils
-const fileUtils = require('../../utils/fileUtils');
 const serverUtils = require('../../utils/serverUtils');
-const xmlUtils = require('../../utils/xmlUtils');
+const apiUtils = require('../../utils/apiUtils');
 
-const dataHandler = require('../../dataHandler.js');
-
-const { ResponseFile } = fileUtils;
-const { MIMETYPES } = serverUtils;
+const poolsHandler = require('../poolsHandler.js');
+const usersHandler = require('../usersHandler.js');
 
 // Functionality
-const getRandomMsg = (userIP, topic) => dataHandler.popRandom(userIP, topic);
-const getReceivedMsgs = (userIP) => dataHandler.getReceivedMessages(userIP);
+const getRandomMsg = (userIP, topic) => {
+  const msg = poolsHandler.popRandom(topic); // Get msg
+  usersHandler.saveMsg(msg, userIP); // Save msg for user
+  return msg; // Return the msg
+};
+
+/** Returns messages received by a user */
+const getReceivedMsgs = (userIP) => {
+  const id = usersHandler.getUserID(userIP);
+  const receivedMsgs = usersHandler.getSavedMsgs(id);
+  return receivedMsgs;
+};
 
 // Responses
 const respondRandomMsg = (request, response) => {
-  const acceptedTypes = serverUtils.getAcceptedTypes(request);
   const userIP = serverUtils.getIP(request);
   const params = serverUtils.getQueryParams(request);
 
-  let content = getRandomMsg(userIP, params.topic);
+  const content = getRandomMsg(userIP, params.topic);
   if (content) {
-    if (acceptedTypes.includes(MIMETYPES.XML)) {
-      content = xmlUtils.parseJSONToXML(content);
-      const type = MIMETYPES.XML;
-      const file = new ResponseFile(content, type);
-      return serverUtils.respond(request, response, 200, file);
-    }
-
-    content = JSON.stringify(content);
-    const type = MIMETYPES.JSON;
-    const file = new ResponseFile(content, type);
-    return serverUtils.respond(request, response, 200, file);
+    // 200 - OK
+    return apiUtils.respondAPIContent(request, response, 200, content);
   }
 
-  const type = MIMETYPES.JSON;
-  const responseHeaders = { 'Content-Type': type };
-  response.writeHead(204, responseHeaders); // 204 - No Content
-  response.end();
-  return response;
+  // 204 - No Content
+  return serverUtils.respondNoContent(request, response);
 };
 
 const respondReceivedMsgs = (request, response) => {
-  const acceptedTypes = serverUtils.getAcceptedTypes(request);
   const userIP = serverUtils.getIP(request);
 
-  let content = getReceivedMsgs(userIP);
+  const content = getReceivedMsgs(userIP);
   if (content) {
-    if (acceptedTypes.includes(MIMETYPES.XML)) {
-      content = xmlUtils.parseJSONToXML(content);
-      const type = MIMETYPES.XML;
-      const file = new ResponseFile(content, type);
-      return serverUtils.respond(request, response, 200, file);
-    }
-
-    content = JSON.stringify(content);
-    const type = MIMETYPES.JSON;
-    const file = new ResponseFile(content, type);
-    return serverUtils.respond(request, response, 200, file);
+    return apiUtils.respondAPIContent(request, response, 200, content);
   }
 
-  const type = MIMETYPES.JSON;
-  const responseHeaders = { 'Content-Type': type };
-  response.writeHead(204, responseHeaders); // 204 - No Content
-  response.end();
-  return response;
+  // 204 - No Content
+  return serverUtils.respondNoContent(request, response);
 };
 
 // Contains endpoints
 const urlResponses = {
-  '/random-msg': respondRandomMsg,
-  '/received-msgs': respondReceivedMsgs,
+  '/msg-random': respondRandomMsg,
+  '/msg-received': respondReceivedMsgs,
 };
 
 module.exports = urlResponses;
