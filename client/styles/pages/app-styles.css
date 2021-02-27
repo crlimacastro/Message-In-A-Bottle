@@ -1,0 +1,23 @@
+@import '../components/message-styles.css';
+@import '../components/msg-list-styles.css';
+#pWelcome {
+    margin-top: 1.6em;
+}
+
+#controls {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#controls>* {
+    margin: 0.8em;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+#fish-controls>* {
+    margin: 0.4em;
+}

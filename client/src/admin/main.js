@@ -17,9 +17,9 @@ const clearOutputs = () => {
 /** Determines whether pagination controls will be displayed */
 const showNavPagination = (bool) => {
   if (bool) {
-    navPagination.style.display = 'block';
+    navPagination.style.visibility = 'visible';
   } else {
-    navPagination.style.display = 'none';
+    navPagination.style.visibility = 'hidden';
   }
 };
 

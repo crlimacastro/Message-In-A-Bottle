@@ -1,0 +1,15 @@
+form {
+    max-width: 512px;
+    display: flex;
+    flex-flow: column;
+}
+
+form>* {
+    margin: 0.8em;
+    display: grid;
+    grid-template-columns: 2fr 3fr;
+}
+
+form button[type="submit"] {
+    display: inline;
+}

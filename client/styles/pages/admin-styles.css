@@ -1,0 +1,59 @@
+@import '../components/message-styles.css';
+@import '../components/msg-list-styles.css';
+#controls {
+    display: flex;
+    flex-flow: column;
+}
+
+#controls>* {
+    margin: 0.8em;
+}
+
+#get-clear-controls {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#get-clear-controls>* {
+    margin: 0.8em;
+}
+
+#get-controls {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+}
+
+#get-controls>* {
+    margin: 0.4em;
+}
+
+#limit-controls {
+    display: flex;
+    align-items: center;
+}
+
+#limit-controls>* {
+    margin-left: 0.4em;
+    margin-right: 0.4em;
+}
+
+#navPagination {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+}
+
+#spanPageInfo {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+@media screen and (min-width: 521px) {
+    #spanPageInfo {
+        margin-left: 0.4em;
+        margin-right: 0.4em;
+    }
+}

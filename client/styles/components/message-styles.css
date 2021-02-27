@@ -1,0 +1,23 @@
+.message {
+    margin: 0.4em;
+    padding: 1em;
+    max-width: 512px;
+    background-color: lightyellow;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.message div {
+    margin: 0.4em;
+}
+
+.message label {
+    font-weight: bold;
+}
+
+.message p {
+    display: inline;
+}
+
+.message button {
+    margin-left: 0.4em;
+}

@@ -1,0 +1,17 @@
+@import '../components/card-styles.css';
+
+#users {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    margin: auto;
+    max-width: 1024px;
+}
+
+#endpoints {
+    list-style: none;
+}
+
+#endpoints > * {
+    margin: 0.4em auto;
+}

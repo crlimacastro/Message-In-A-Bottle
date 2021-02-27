@@ -1,0 +1,20 @@
+#navSite {
+    display: flex;
+    margin: 1em auto;
+}
+
+#navSite>a {
+    margin: auto 0.4em;
+    display: flex;
+    width: 4em;
+    height: 2em;
+    font-weight: bold;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(161, 226, 247, 0.4);
+    transition: background-color 0.25s ease-out;
+}
+
+#navSite>a:hover {
+    background-color: rgba(100, 206, 242, 0.4);
+}

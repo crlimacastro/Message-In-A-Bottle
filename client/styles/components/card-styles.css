@@ -1,0 +1,22 @@
+.card {
+    margin: 0.4em;
+    padding: 0 0.8em;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    background-color: rgba(161, 226, 247, 0.4);
+    transition: background-color 0.25s ease-out;
+}
+
+.card:hover {
+    background-color: rgba(100, 206, 242, 0.4);
+}
+
+.card h3 {
+    text-align: center;
+}
+
+.card p {
+    width: 256px;
+    font-weight: normal;
+}

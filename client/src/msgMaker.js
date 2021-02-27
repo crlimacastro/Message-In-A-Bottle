@@ -35,19 +35,35 @@ const makeMsgLite = (msg) => {
 
 // Makes & returns DOM msg with some information such as received time
 const makeMsg = (msg) => {
+  // Create DOM Elements
+  const lblMessage = document.createElement('label');
+  lblMessage.innerHTML = 'Message: ';
   const pMessage = document.createElement('p');
-  pMessage.innerHTML = `Message: ${msg.message}`;
+  pMessage.innerHTML = msg.message;
+  const divMessage = document.createElement('div');
+  const lblTopic = document.createElement('label');
+  lblTopic.innerHTML = 'Topic: ';
   const pTopic = document.createElement('p');
-  pTopic.innerHTML = `Topic: ${msg.topic}`;
-  const pReceivedAt = document.createElement('p');
-  pReceivedAt.innerHTML = `Received on: ${new Date(msg.received_at).toGMTString()}`;
+  pTopic.innerHTML = msg.topic ? msg.topic : 'none';
+  const divTopic = document.createElement('div');
+  const lblCreatedOn = document.createElement('label');
+  lblCreatedOn.innerHTML = 'Created on: ';
+  const pCreatedOn = document.createElement('p');
+  pCreatedOn.innerHTML = new Date(msg.created_at).toGMTString();
+  const divCreatedOn = document.createElement('div');
   const divMsg = document.createElement('div');
   divMsg.classList.add('message');
 
   // Update the DOM
-  divMsg.appendChild(pMessage);
-  divMsg.appendChild(pTopic);
-  divMsg.appendChild(pReceivedAt);
+  divMessage.appendChild(lblMessage);
+  divMessage.appendChild(pMessage);
+  divMsg.appendChild(divMessage);
+  divTopic.appendChild(lblTopic);
+  divTopic.appendChild(pTopic);
+  divMsg.appendChild(divTopic);
+  divCreatedOn.appendChild(lblCreatedOn);
+  divCreatedOn.appendChild(pCreatedOn);
+  divMsg.appendChild(divCreatedOn);
 
   return divMsg;
 };
@@ -55,28 +71,48 @@ const makeMsg = (msg) => {
 // Makes & returns DOM msg with full information and delete button
 const makeMsgAdmin = (msg) => {
   // Create DOM Elements
+  const lblID = document.createElement('label');
+  lblID.innerHTML = 'ID: ';
   const pID = document.createElement('p');
-  pID.innerHTML = `ID: ${msg.id}`;
+  pID.innerHTML = msg.id;
+  const divID = document.createElement('div');
+  const lblMessage = document.createElement('label');
+  lblMessage.innerHTML = 'Message: ';
   const pMessage = document.createElement('p');
-  pMessage.innerHTML = `Message: ${msg.message}`;
+  pMessage.innerHTML = msg.message;
+  const divMessage = document.createElement('div');
+  const lblTopic = document.createElement('label');
+  lblTopic.innerHTML = 'Topic: ';
   const pTopic = document.createElement('p');
-  pTopic.innerHTML = `Topic: ${msg.topic}`;
-  const pCreatedAt = document.createElement('p');
-  pCreatedAt.innerHTML = `Created on: ${new Date(msg.created_at).toGMTString()}`;
-  const divMsg = document.createElement('div');
-  divMsg.classList.add('message');
+  pTopic.innerHTML = msg.topic ? msg.topic : 'none';
+  const divTopic = document.createElement('div');
+  const lblCreatedOn = document.createElement('label');
+  lblCreatedOn.innerHTML = 'Created on: ';
+  const pCreatedOn = document.createElement('p');
+  pCreatedOn.innerHTML = new Date(msg.created_at).toGMTString();
+  const divCreatedOn = document.createElement('div');
   const btnDelete = document.createElement('button');
   btnDelete.innerHTML = 'Delete';
   btnDelete.onclick = () => {
     deleteMsg(msg); // Delete server msg
     divMsg.remove(); // Delete DOM msg
   };
+  const divMsg = document.createElement('div');
+  divMsg.classList.add('message');
 
   // Update the DOM
-  divMsg.appendChild(pID);
-  divMsg.appendChild(pMessage);
-  divMsg.appendChild(pTopic);
-  divMsg.appendChild(pCreatedAt);
+  divID.appendChild(lblID);
+  divID.appendChild(pID);
+  divMsg.appendChild(divID);
+  divMessage.appendChild(lblMessage);
+  divMessage.appendChild(pMessage);
+  divMsg.appendChild(divMessage);
+  divTopic.appendChild(lblTopic);
+  divTopic.appendChild(pTopic);
+  divMsg.appendChild(divTopic);
+  divCreatedOn.appendChild(lblCreatedOn);
+  divCreatedOn.appendChild(pCreatedOn);
+  divMsg.appendChild(divCreatedOn);
   divMsg.appendChild(btnDelete);
 
   return divMsg;

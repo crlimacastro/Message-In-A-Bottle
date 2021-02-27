@@ -6,35 +6,38 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.png" type="image/png">
+    <link rel="stylesheet" href="./styles/default-styles.css">
+    <link rel="stylesheet" href="./styles/pages/app-styles.css">
     <script src="./src/app/loader.js" type="module"></script>
     <title>App - Message in a Bottle</title>
 </head>
 
 <body>
     <header>
-        <div>
+        <div id="title">
             <a href="/"><img src="./media/logo-small.png" alt=""></a>
             <h1>Message in a Bottle</h1>
         </div>
-        <nav>
-            <a href="/">Home</a>
-            <a href="./app.html">App</a>
-            <a href="./write.html">Write</a>
-            <a href="./admin.html">Admin</a>
+        <nav id="navSite">
+            <a href="/" class="reset-a">Home</a>
+            <a href="./app.html" class="reset-a">App</a>
+            <a href="./write.html" class="reset-a">Write</a>
+            <a href="./admin.html" class="reset-a">Admin</a>
         </nav>
     </header>
 
-    <p>Fish for messages at sea.</p>
+    <p id="pWelcome">Fish for messages out at sea.</p>
 
     <section id="controls">
-        <div>
-            <label for="topic">Topic (Optional):</label>
-            <input id="inputTopic" type="text" name="topic">
-            <button id="btnGetMessage">Fish Bottled Message</button>
+        <div id="fish-controls">
+            <span id="topic-control">
+                <label for="topic">Topic (Optional):</label>
+                <input id="inputTopic" type="text" name="topic">
+            </span>
+            <button id="btnGetMessage">Fish Message</button>
         </div>
 
         <button id="btnGetReceivedMsgs">Show Received Messages</button>
-        </div>
     </section>
 
     <section id="content">
