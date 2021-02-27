@@ -156,8 +156,6 @@ These are the possible status code that the API may send, where it sends them, a
 
 [Back to Responses](#Responses)
 
-[Back to Top](#top)
-
 ## Errors
 
 You may receive any of the following errors when working with the API.
@@ -170,8 +168,8 @@ An important parameter was missing from your request's query string or body. Che
 
 Your request was sent with the wrong HTTP method(GET/POST/DELETE/etc...). Make sure that you are sending the correct method by referencing your desired endpoint above.
 
+[Back to Top](#top)
+
 [Back to Responses](#Responses)
 
 [Back to Status Codes](#Status-Codes)
-
-[Back to Top](#top)
