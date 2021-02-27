@@ -1,6 +1,20 @@
 import * as ajax from '../ajax.js';
 import * as msgMaker from '../msgMaker.js';
 
+// DOM Elements
+// Controls
+let selectLimit;
+let btnGetAllMsgs;
+let btnClearPool;
+// Pagination Controls
+let navPagination;
+let btnPreviousPage;
+let spanPageInfo;
+let btnNextPage;
+// Output
+let ulMessages;
+let pFeedback;
+
 // Object with helper methods for page controls
 const controls = {
   limit: undefined,
@@ -35,9 +49,9 @@ const updateInfo = (pageResponse) => {
 const updateUlMessages = (messages) => {
   ulMessages.innerHTML = ''; // Clear ul
 
-  for (const msg of messages) {
-    ulMessages.appendChild(msgMaker.makeMsgAdmin(msg));
-  }
+  messages.forEach((msg) => {
+    ulMessages.appendChild(msgMaker.makeMsgAdmin(msg, pFeedback));
+  });
 };
 
 /** Fetches pool messages and updates DOM elements */
@@ -71,24 +85,20 @@ const fetchPool = (limit, page) => {
 };
 
 const init = () => {
-  // DOM Elements
-  // Controls
-  const limit = document.querySelector('#limit');
-  const btnGetAllMsgs = document.querySelector('#btnGetAllMsgs');
-  const btnClearPool = document.querySelector('#btnClearPool');
-  // Pagination Controls
-  const navPagination = document.querySelector('#navPagination');
-  const btnPreviousPage = document.querySelector('#btnPreviousPage');
-  const spanPageInfo = document.querySelector('#spanPageInfo');
-  const btnNextPage = document.querySelector('#btnNextPage');
-  // Output
-  const ulMessages = document.querySelector('#ulMessages');
-  const pFeedback = document.querySelector('#pFeedback');
+  selectLimit = document.querySelector('#selectLimit');
+  btnGetAllMsgs = document.querySelector('#btnGetAllMsgs');
+  btnClearPool = document.querySelector('#btnClearPool');
+  navPagination = document.querySelector('#navPagination');
+  btnPreviousPage = document.querySelector('#btnPreviousPage');
+  spanPageInfo = document.querySelector('#spanPageInfo');
+  btnNextPage = document.querySelector('#btnNextPage');
+  ulMessages = document.querySelector('#ulMessages');
+  pFeedback = document.querySelector('#pFeedback');
 
   showNavPagination(false); // Hide pagination controls at the beginning
 
   btnGetAllMsgs.onclick = () => {
-    controls.limit = Number(limit.value);
+    controls.limit = Number(selectLimit.value);
     fetchPool(controls.limit, 0);
   };
 
@@ -117,14 +127,14 @@ const init = () => {
 
   btnPreviousPage.onclick = () => {
     if (controls.currentPage > 0) {
-      controls.currentPage--;
+      controls.currentPage -= 1;
       fetchPool(controls.limit, controls.currentPage);
     }
   };
 
   btnNextPage.onclick = () => {
     if (controls.currentPage < controls.totalPages - 1) {
-      controls.currentPage++;
+      controls.currentPage += 1;
       fetchPool(controls.limit, controls.currentPage);
     }
   };

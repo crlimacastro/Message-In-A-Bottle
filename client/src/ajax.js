@@ -15,6 +15,7 @@ const sendFormRequest = (e, callback) => {
 
   // Get all data in form
   const keyValuePairs = [];
+
   for (const element of form.elements) {
     const key = encodeURIComponent(element.name);
     const value = encodeURIComponent(element.value);

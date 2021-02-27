@@ -10,8 +10,8 @@ const init = () => {
   const pFeedback = document.querySelector('#pFeedback');
 
   formWrite.onsubmit = (e) => {
-    ajax.sendFormRequest(e, (e) => {
-      const xhr = e.target;
+    ajax.sendFormRequest(e, (ev) => {
+      const xhr = ev.target;
       const response = JSON.parse(xhr.response);
 
       switch (xhr.status) {

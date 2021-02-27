@@ -1,6 +1,16 @@
 import * as ajax from '../ajax.js';
 import * as msgMaker from '../msgMaker.js';
 
+// DOM Elements
+// Controls
+let inputTopic;
+let btnGetMessage;
+let btnGetReceivedMsgs;
+// Output
+let msgContainer;
+let ulMessages;
+let pFeedback;
+
 // Clears all client outputs and feedback
 const clearOutputs = () => {
   msgContainer.innerHTML = '';
@@ -12,21 +22,18 @@ const clearOutputs = () => {
 const updateUlMessages = (messages) => {
   ulMessages.innerHTML = ''; // Clear ul
 
-  for (const msg of messages) {
+  messages.forEach((msg) => {
     ulMessages.appendChild(msgMaker.makeMsg(msg));
-  }
+  });
 };
 
 const init = () => {
-  // DOM Elements
-  // Controls
-  const inputTopic = document.querySelector('#inputTopic');
-  const btnGetMessage = document.querySelector('#btnGetMessage');
-  const btnGetReceivedMsgs = document.querySelector('#btnGetReceivedMsgs');
-  // Output
-  const msgContainer = document.querySelector('#msgContainer');
-  const ulMessages = document.querySelector('#ulMessages');
-  const pFeedback = document.querySelector('#pFeedback');
+  inputTopic = document.querySelector('#inputTopic');
+  btnGetMessage = document.querySelector('#btnGetMessage');
+  btnGetReceivedMsgs = document.querySelector('#btnGetReceivedMsgs');
+  msgContainer = document.querySelector('#msgContainer');
+  ulMessages = document.querySelector('#ulMessages');
+  pFeedback = document.querySelector('#pFeedback');
 
   btnGetMessage.onclick = () => {
     ajax.sendGETRequest(`/msg-random?topic=${inputTopic.value}`, (e) => {
@@ -35,11 +42,12 @@ const init = () => {
       const xhr = e.target;
 
       switch (xhr.status) {
-        case 200: // OK
+        case 200: { // OK
           const msg = JSON.parse(xhr.response);
           msgContainer.innerHTML = ''; // Clear container
           msgContainer.appendChild(msgMaker.makeMsgLite(msg));
           break;
+        }
         case 204: // No Content
           if (inputTopic.value === '') {
             pFeedback.innerHTML = 'There are currently no messages out at sea. Check back later or write your own.';
@@ -61,7 +69,7 @@ const init = () => {
       const xhr = e.target;
 
       switch (xhr.status) {
-        case 200: // OK
+        case 200: { // OK
           const response = JSON.parse(xhr.response);
           const messages = Object.values(response);
 
@@ -70,6 +78,7 @@ const init = () => {
             updateUlMessages(messages);
           }
           break;
+        }
         case 204: // No Content
           pFeedback.innerHTML = 'You have no messages saved. Try to fish out some.';
           break;

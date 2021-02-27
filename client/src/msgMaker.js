@@ -1,19 +1,19 @@
 import * as ajax from './ajax.js';
 
-const deleteMsg = (msg) => {
+const deleteMsg = (msg, outputElement) => {
   ajax.sendDELETERequest(`/pool-delete?id=${msg.id}`, (e) => {
     const xhr = e.target;
     const response = JSON.parse(xhr.response);
 
     switch (xhr.status) {
       case 200: // OK
-        pFeedback.innerHTML = response.message;
+        outputElement.innerHTML = response.message;
         break;
       case 405: // Method Not Allowed
-        pFeedback.innerHTML = response.message;
+        outputElement.innerHTML = response.message;
         break;
       default:
-        pFeedback.innerHTML = 'Status Code not handled by client';
+        outputElement.innerHTML = 'Status Code not handled by client';
         break;
     }
   });
@@ -69,7 +69,7 @@ const makeMsg = (msg) => {
 };
 
 // Makes & returns DOM msg with full information and delete button
-const makeMsgAdmin = (msg) => {
+const makeMsgAdmin = (msg, outputElement) => {
   // Create DOM Elements
   const lblID = document.createElement('label');
   lblID.innerHTML = 'ID: ';
@@ -91,14 +91,14 @@ const makeMsgAdmin = (msg) => {
   const pCreatedOn = document.createElement('p');
   pCreatedOn.innerHTML = new Date(msg.created_at).toGMTString();
   const divCreatedOn = document.createElement('div');
+  const divMsg = document.createElement('div');
+  divMsg.classList.add('message');
   const btnDelete = document.createElement('button');
   btnDelete.innerHTML = 'Delete';
   btnDelete.onclick = () => {
-    deleteMsg(msg); // Delete server msg
+    deleteMsg(msg, outputElement); // Delete server msg
     divMsg.remove(); // Delete DOM msg
   };
-  const divMsg = document.createElement('div');
-  divMsg.classList.add('message');
 
   // Update the DOM
   divID.appendChild(lblID);
