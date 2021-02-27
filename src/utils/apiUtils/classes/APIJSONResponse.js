@@ -8,6 +8,7 @@ class APIJSONResponse {
     this.updated_at = this.created_at;
     this.hostname = os.hostname();
     this.id = uuidv4();
+    this.type = this.constructor.name;
   }
 }
 

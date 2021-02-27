@@ -111,11 +111,11 @@ const topicCount = (topic) => {
  * @param {Number} limit Amount to get back.
  * @param {Number} offset Index to start from. */
 const peek = (limit = 1, offset = 0) => {
-  let i = Number(offset); // cast offset to a number
+  let i = offset ? Number(offset) : 0; // cast offset to a number
   i = mathUtils.clamp(i, 0, mainCount() - 1); // clamp between 0 and count
   i = Math.floor(i); // make sure it is an integer
 
-  let lim = Number(limit); // cast limit to a number
+  let lim = limit ? Number(limit) : 1; // cast limit to a number
   lim = mathUtils.clamp(lim, 0, mainCount() - i); // clamp between 0 and last index remaining
   lim = Math.floor(lim); // make sure it is an integer
 

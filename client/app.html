@@ -37,7 +37,26 @@
             <button id="btnGetMessage">Fish Message</button>
         </div>
 
-        <button id="btnGetReceivedMsgs">Show Received Messages</button>
+        <div id="received-controls">
+            <span id="limit-controls">
+                <label for="limit">Amount:</label>
+                <select name="limit" id="selectLimit">
+                    <option value="4">4</option>
+                    <option value="8">8</option>
+                    <option value="12">12</option>
+                    <option value="16">16</option>
+                    <option value="32">32</option>
+                    <option value="64">64</option>
+                </select>
+            </span>
+            <button id="btnGetReceivedMsgs">Show Received Messages</button>
+        </div>
+
+        <nav id="navPagination">
+            <button id="btnPreviousPage">&lt&lt Previous Page</button>
+            <span id="spanPageInfo">0/0</span>
+            <button id="btnNextPage">Next Page &gt&gt</button>
+        </nav>
     </section>
 
     <section id="content">

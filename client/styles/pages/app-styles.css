@@ -1,5 +1,6 @@
 @import '../components/message-styles.css';
 @import '../components/msg-list-styles.css';
+@import '../components/pagination-styles.css';
 #pWelcome {
     margin-top: 1.6em;
 }

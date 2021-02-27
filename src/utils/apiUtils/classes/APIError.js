@@ -1,6 +1,6 @@
 class APIError {
-  constructor(id, message, url) {
-    this.id = id;
+  constructor(message, url) {
+    this.id = this.constructor.name;
     this.message = message;
     this.url = url;
   }

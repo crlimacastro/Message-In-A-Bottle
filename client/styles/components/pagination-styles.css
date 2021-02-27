@@ -1,0 +1,27 @@
+#limit-controls {
+    display: flex;
+    align-items: center;
+}
+
+#limit-controls>* {
+    margin-left: 0.4em;
+    margin-right: 0.4em;
+}
+
+#navPagination {
+    visibility: hidden;
+    display: flex;
+    align-items: center;
+}
+
+#spanPageInfo {
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+}
+
+@media screen and (min-width: 521px) {
+    #spanPageInfo {
+        margin-left: 0.4em;
+        margin-right: 0.4em;
+    }
+}

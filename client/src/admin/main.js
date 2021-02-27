@@ -17,10 +17,12 @@ let pFeedback;
 
 // Object with helper methods for page controls
 const controls = {
-  limit: undefined,
   currentPage: undefined,
   totalPages: undefined,
 };
+
+/** Helper function to get number value of limit */
+const limit = () => Number(selectLimit.value);
 
 /** Clears all client outputs and feedback */
 const clearOutputs = () => {
@@ -98,44 +100,44 @@ const init = () => {
   showNavPagination(false); // Hide pagination controls at the beginning
 
   btnGetAllMsgs.onclick = () => {
-    controls.limit = Number(selectLimit.value);
-    fetchPool(controls.limit, 0);
+    fetchPool(limit(), 0);
   };
 
   btnClearPool.onclick = () => {
-    ajax.sendDELETERequest('/pool-clear', (e) => {
-      clearOutputs();
-      showNavPagination(false);
+    if (confirm('Are you sure you wish to clear all data from the server?')) {
+      ajax.sendDELETERequest('/pool-clear', (e) => {
+        clearOutputs();
+        showNavPagination(false);
 
-      const xhr = e.target;
-      const response = JSON.parse(xhr.response);
+        const xhr = e.target;
+        const response = JSON.parse(xhr.response);
 
-      switch (xhr.status) {
-        case 200: // OK
-
-          pFeedback.innerHTML = response.message;
-          break;
-        case 405: // Method Not Allowed
-          pFeedback.innerHTML = response.message;
-          break;
-        default:
-          pFeedback.innerHTML = 'Status Code not handled by client';
-          break;
-      }
-    });
+        switch (xhr.status) {
+          case 200: // OK
+            pFeedback.innerHTML = response.message;
+            break;
+          case 405: // Method Not Allowed
+            pFeedback.innerHTML = response.message;
+            break;
+          default:
+            pFeedback.innerHTML = 'Status Code not handled by client';
+            break;
+        }
+      });
+    }
   };
 
   btnPreviousPage.onclick = () => {
     if (controls.currentPage > 0) {
       controls.currentPage -= 1;
-      fetchPool(controls.limit, controls.currentPage);
+      fetchPool(limit(), controls.currentPage);
     }
   };
 
   btnNextPage.onclick = () => {
     if (controls.currentPage < controls.totalPages - 1) {
       controls.currentPage += 1;
-      fetchPool(controls.limit, controls.currentPage);
+      fetchPool(limit(), controls.currentPage);
     }
   };
 };

@@ -37,12 +37,6 @@ const clearPool = () => {
 // Responses
 const respondPoolPage = (request, response) => {
   const params = serverUtils.getQueryParams(request);
-
-  if (!params.limit || !params.page) {
-    // 400 - Bad Request
-    return apiUtils.respondAPIContent(request, response, 400, new errors.ParamUndefinedError());
-  }
-
   const content = getPoolPage(params.limit, params.page);
   return apiUtils.respondAPIContent(request, response, 200, content);
 };
@@ -59,15 +53,16 @@ const respondPoolDelete = (request, response) => {
 
       const deletedMsg = poolDeleteMsg(params.id);
 
-      // If a msg was actually delted (null otherwise)
+      // If a msg was actually deleted (null otherwise)
       if (deletedMsg) {
         // 200 - OK
         return apiUtils.respondAPIContent(request, response, 200,
           new jsonResponses.MsgDeletedResponse());
       }
 
-      // 204 - No Content
-      return serverUtils.respondNoContent(request, response);
+      // 404 - Not Found
+      return serverUtils.respondAPIContent(request, response, 404,
+        new jsonResponses.MsgNotFoundResponse(params.id));
     }
     default:
       // 405 - Method Not Allowed
