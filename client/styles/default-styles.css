@@ -49,6 +49,10 @@ button:hover {
     text-decoration: none;
 }
 
+.reset-a:link {
+    color: black;
+}
+
 .reset-a:active {
     color: black;
 }
