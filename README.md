@@ -1,6 +1,10 @@
 <h1 id="top">Message in a Bottle</h1>
 
-Web app &amp; API to send anonymous messages received by random recipients
+Web app &amp; API to send anonymous messages received by random recipients.
+
+[See Documentation](https://github.com/crlimacastro/crl3554-430-project-1/blob/main/documentation.md)
+
+## Index
 
 [Purpose of the site](#Purpose-of-the-site)
 
