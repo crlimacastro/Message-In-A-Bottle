@@ -2,6 +2,7 @@ import * as ajax from '../ajax.js';
 import * as msgMaker from '../msgMaker.js';
 
 // DOM Elements
+let pWelcome;
 // Controls
 let inputTopic;
 let btnGetMessage;
@@ -86,6 +87,7 @@ const fetchReceived = (limit, page) => {
 };
 
 const init = () => {
+  pWelcome = document.querySelector('#pWelcome');
   inputTopic = document.querySelector('#inputTopic');
   btnGetMessage = document.querySelector('#btnGetMessage');
   btnGetReceivedMsgs = document.querySelector('#btnGetReceivedMsgs');
@@ -99,6 +101,19 @@ const init = () => {
 
   showNavPagination(false); // Hide pagination controls at the beginning
 
+  // Get a random welcome message from the array
+  fetch('src/app/randWelcomes.json')
+    .then(response => {
+      return response.json();
+    })
+    .then(welcomeMessages => {
+      if (welcomeMessages) {
+        let i = Math.floor(Math.random() * welcomeMessages.length);
+        pWelcome.innerHTML = welcomeMessages[i];
+      }
+    });
+
+  // Events
   btnGetMessage.onclick = () => {
     ajax.sendGETRequest(`/msg-random?topic=${inputTopic.value}`, (e) => {
       clearOutputs();
@@ -108,7 +123,7 @@ const init = () => {
       switch (xhr.status) {
         case 200: { // OK
           const msg = JSON.parse(xhr.response);
-          
+
           switch (msg.type) {
             case 'MessageResponse':
               msgContainer.appendChild(msgMaker.makeMsgLite(msg));
