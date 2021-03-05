@@ -4,7 +4,7 @@ class NoSavedMsgResponse extends APIJSONResponse {
   constructor() {
     super();
 
-    this.message = 'User has no saved messages.';
+    this.message = 'User has no saved messages';
   }
 }
 

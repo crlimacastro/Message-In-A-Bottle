@@ -4,7 +4,7 @@ class PoolEmptyResponse extends APIJSONResponse {
   constructor() {
     super();
 
-    this.message = 'There are currently no messages in the pool.';
+    this.message = 'There are currently no messages in the pool';
   }
 }
 

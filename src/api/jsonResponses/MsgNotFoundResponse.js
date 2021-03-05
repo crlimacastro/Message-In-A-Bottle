@@ -4,7 +4,7 @@ class MsgNotFoundResponse extends APIJSONResponse {
   constructor(id) {
     super();
 
-    this.message = `The msg with ID ${id} was not found.`;
+    this.message = `The msg with ID ${id} was not found`;
   }
 }
 

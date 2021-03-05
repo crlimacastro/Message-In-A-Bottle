@@ -4,7 +4,7 @@ class TopicEmptyResponse extends APIJSONResponse {
   constructor() {
     super();
 
-    this.message = 'There are currently no messages with this topic.';
+    this.message = 'There are currently no messages with this topic';
   }
 }
 
