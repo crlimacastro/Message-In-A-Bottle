@@ -61,7 +61,7 @@ const respondPoolDelete = (request, response) => {
       }
 
       // 404 - Not Found
-      return serverUtils.respondAPIContent(request, response, 404,
+      return apiUtils.respondAPIContent(request, response, 404,
         new jsonResponses.MsgNotFoundResponse(params.id));
     }
     default:

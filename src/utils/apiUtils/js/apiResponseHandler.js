@@ -6,11 +6,15 @@ const { MIMETYPES } = serverUtils;
 
 const respondAPIContent = (request, response, statusCode, content) => {
   const acceptedTypes = serverUtils.getAcceptedTypes(request);
-  let parsedContent = JSON.stringify(content);
-  let type = MIMETYPES.JSON;
+
+  let parsedContent;
+  let type;
   if (acceptedTypes.includes(MIMETYPES.XML)) {
-    parsedContent = xmlUtils.parseJSONToXML(parsedContent);
+    parsedContent = xmlUtils.parseObjToXML(content);
     type = MIMETYPES.XML;
+  } else {
+    parsedContent = JSON.stringify(content);
+    type = MIMETYPES.JSON;
   }
   const file = new ResponseFile(parsedContent, type);
   return serverUtils.respond(request, response, statusCode, file);
