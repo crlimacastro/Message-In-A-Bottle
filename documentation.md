@@ -158,6 +158,10 @@ These are the possible status code that the API may send, where it sends them, a
 
 * /pool-clear - Responds OK on a successful clear with an API response.
 
+* /msg-forget - Responds OK on a successful forget with an API response.
+
+* /msg-forget-all - Responds OK one a succesful clear with an API response.
+
 ### 201 - Created
 
 * /write-msg - Responds CREATED when your message is successfully saved to the server.
@@ -172,6 +176,8 @@ These are the possible status code that the API may send, where it sends them, a
 
 * /pool-delete - Responds Not Found when there is no message with the ID specified.
 
+* /msg-forget - Responds Not Found when there is no message with the ID specified.
+
 ### 405 - Method Not Allowed
 
 * /write-msg - Responds Method Not Allowed when using any other method than POST for this endpoint.
@@ -179,6 +185,10 @@ These are the possible status code that the API may send, where it sends them, a
 * /pool-delete - Responds Method Not Allowed when using any other method than DELETE for this endpoint.
 
 * /pool-clear - Responds Method Not Allowed when using any other method than DELETE for this endpoint.
+
+* /msg-forget - Responds Method Not Allowed wheni using any other method than DELETE for this endpoint.
+
+* /msg-forget-all - Responds Method Not Allowed wheni using any other method than DELETE for this endpoint.
 
 [Back to Top](#top)
 
