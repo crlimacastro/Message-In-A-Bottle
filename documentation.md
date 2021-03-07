@@ -16,59 +16,87 @@ The following are the functional endpoints of the API. Wherever it may be hosted
 
 ### GET
 
-* /msg-random?topic=string
+```javascript
+/msg-random?topic=string
+```
 
 Retrieve a random message from the server pool and save it. Specify a topic to search for messages with that tag only.
 
 Query Parameters:
 
-topic (optional): filtering tag to ensure you receive only messages of this topic.
+* topic (optional): filtering tag to ensure you receive only messages of this topic.
 
-* /msg-received?limit=number&page=number
+```javascript
+/msg-received?limit=number&page=number
+```
 
 Returns a page of the messages you have received in the past.
 
 Query Parameters:
 
-limit (optional): How many messages to get per page.
+* limit (optional): How many messages to get per page.
 
-page (optional): Index (starting from 0) of the page you with to get.
+* page (optional): Index (starting from 0) of the page you with to get.
 
-* /pool?limit=number&page=number
+```javascript
+/pool?limit=number&page=number
+```
 
 Admin endpoint that returns a page of the messages in the public pool.
 
 Query Parameters:
 
-limit (optional): How many messages to get per page.
+* limit (optional): How many messages to get per page.
 
-page (optional): Index (starting from 0) of the page you with to get.
+* page (optional): Index (starting from 0) of the page you with to get.
 
 ### POST
 
-* /write-msg
+```javascript
+/write-msg
+```
 
 Stores a message in the server.
 
 Body Parameters:
 
-message (string): Text content of the message.
+* message (string): Text content of the message.
 
-topic (optional, string): Topic or tag for the message.
+* topic (optional, string): Topic or tag for the message.
 
 ### DELETE
 
-* /pool-delete?id=string
+```javascript
+/pool-delete?id=string
+```
 
 Admin endpoint that deletes a message from the server.
 
 Query Parameters:
 
-id: identifier of the message to delete.
+* id: identifier of the message to delete.
 
-* /pool-clear
+```javascript
+/pool-clear
+```
 
 Admin endpoint that removes all data stored in the server.
+
+```javascript
+/msg-forget?id=string
+```
+
+Deletes a message from the user's saved messages.
+
+Query Parameters:
+
+* id: identifier of the message to delete.
+
+```javascript
+/msg-forget-all
+```
+
+Deletes all messages saved by the user.
 
 [Back to Top](#top)
 
