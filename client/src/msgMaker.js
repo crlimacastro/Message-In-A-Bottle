@@ -19,6 +19,25 @@ const deleteMsg = (msg, outputElement) => {
   });
 };
 
+const forgetMsg = (msg, outputElement) => {
+  ajax.sendDELETERequest(`/msg-forget?id=${msg.id}`, (e) => {
+    const xhr = e.target;
+    const response = JSON.parse(xhr.response);
+
+    switch (xhr.status) {
+      case 200: // OK
+        outputElement.innerHTML = 'Message forgotten successfully';
+        break;
+      case 405: // Method Not Allowed
+        outputElement.innerHTML = response.message;
+        break;
+      default:
+        outputElement.innerHTML = 'Status Code not handled by client';
+        break;
+    }
+  });
+}
+
 // Makes & returns light DOM msg with just the text
 const makeMsgLite = (msg) => {
   // Create DOM Elements
@@ -34,7 +53,7 @@ const makeMsgLite = (msg) => {
 };
 
 // Makes & returns DOM msg with some information such as received time
-const makeMsg = (msg) => {
+const makeMsg = (msg, outputElement) => {
   // Create DOM Elements
   const lblMessage = document.createElement('label');
   lblMessage.innerHTML = 'Message: ';
@@ -53,6 +72,12 @@ const makeMsg = (msg) => {
   const divCreatedOn = document.createElement('div');
   const divMsg = document.createElement('div');
   divMsg.classList.add('message');
+  const btnForget = document.createElement('button');
+  btnForget.innerHTML = 'Forget';
+  btnForget.onclick = () => {
+    forgetMsg(msg, outputElement); // Delete server msg
+    divMsg.remove(); // Delete DOM msg
+  };
 
   // Update the DOM
   divMessage.appendChild(lblMessage);
@@ -64,6 +89,7 @@ const makeMsg = (msg) => {
   divCreatedOn.appendChild(lblCreatedOn);
   divCreatedOn.appendChild(pCreatedOn);
   divMsg.appendChild(divCreatedOn);
+  divMsg.appendChild(btnForget);
 
   return divMsg;
 };

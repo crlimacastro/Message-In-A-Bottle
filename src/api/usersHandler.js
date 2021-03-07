@@ -113,6 +113,44 @@ const peekSavedMsgs = (id, limit = 1, offset = 0) => {
   return [];
 };
 
+/**
+ * Deletes message from the users' saved messages.
+ * Returns the deleted message.
+ * Returns null if nothing was deleted.
+ * Or user not found.
+ * @param {String} userID
+ * @param {String} msgID
+ */
+const forgetMsg = (userID, msgID) => {
+  const user = users[userID];
+
+  if (user) {
+    const msgObj = user.savedMsgs[msgID];
+
+    // If a message was found with that id
+    if (msgObj) {
+      const deletedMsg = msgObj; // Save deleted msg
+      delete user.savedMsgs[msgID]; // Delete msg at user storage
+
+      return deletedMsg;
+    }
+  }
+
+  return null;
+};
+
+/**
+ * Deletes all messages from a user's storage.
+ * @param {String} id Id of the user.
+ */
+const forgetAll = (id) => {
+  const user = users[id];
+
+  if (user) {
+    user.savedMsgs = {};
+  }
+};
+
 // #endregion
 
 module.exports = {
@@ -123,4 +161,6 @@ module.exports = {
   saveMsg,
   peekSavedMsgs,
   savedMsgsCount,
+  forgetMsg,
+  forgetAll,
 };

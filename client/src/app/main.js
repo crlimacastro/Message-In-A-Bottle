@@ -7,6 +7,7 @@ let pWelcome;
 let inputTopic;
 let btnGetMessage;
 let btnGetReceivedMsgs;
+let btnForgetAll;
 // Pagination Controls
 let navPagination;
 let btnPreviousPage;
@@ -55,11 +56,11 @@ const updateUlMessages = (messages) => {
   ulMessages.innerHTML = ''; // Clear ul
 
   messages.forEach((msg) => {
-    ulMessages.appendChild(msgMaker.makeMsg(msg));
+    ulMessages.appendChild(msgMaker.makeMsg(msg, pFeedback));
   });
 };
 
-/** Fetches received messages and updates DOM elements */
+/** Fetches received messages and updates DOM elements. */
 const fetchReceived = (limit, page) => {
   ajax.sendGETRequest(`/msg-received?limit=${limit}&page=${page}`, (e) => {
     clearOutputs();
@@ -91,6 +92,7 @@ const init = () => {
   inputTopic = document.querySelector('#inputTopic');
   btnGetMessage = document.querySelector('#btnGetMessage');
   btnGetReceivedMsgs = document.querySelector('#btnGetReceivedMsgs');
+  btnForgetAll = document.querySelector('#btnForgetAll');
   navPagination = document.querySelector('#navPagination');
   btnPreviousPage = document.querySelector('#btnPreviousPage');
   spanPageInfo = document.querySelector('#spanPageInfo');
@@ -152,6 +154,30 @@ const init = () => {
 
   btnGetReceivedMsgs.onclick = () => {
     fetchReceived(limit(), 0);
+  };
+
+  btnForgetAll.onclick = () => {
+    if (confirm('Are you sure you wish to forget all of your messages?')) {
+      ajax.sendDELETERequest(`/msg-forget-all`, (e) => {
+        clearOutputs();
+        showNavPagination(false);
+
+        const xhr = e.target;
+        const response = JSON.parse(xhr.response);
+
+        switch (response.type) {
+          case 'PoolClearedResponse': // Method Not Allowed
+            pFeedback.innerHTML = 'All messages forgotten';
+            break;
+          case 'RequestMethodError': // OK
+            pFeedback.innerHTML = response.message;
+            break;
+          default:
+            pFeedback.innerHTML = 'Response Type not handled by client';
+            break;
+        }
+      });
+    }
   };
 
   btnPreviousPage.onclick = () => {

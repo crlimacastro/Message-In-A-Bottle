@@ -38,7 +38,7 @@ In the end, I scrapped the whole system and it cost me a lot of wasted time. It 
 
 Server Storage - the most obvious improvement would be to store the message pools in an external, persistent server storage so that messages are saved between server reloads.
 
-Saved Messages Extra Controls - I would also add the ability for users to "Forget" a saved message, the way Admins can delete one from the pool. I would, in general, add more functionality and controls over saved information and how it is displayed (different sorting methods, for example).
+Add more functionality and controls over saved information and how it is displayed (different sorting methods, for example).
 
 Most Popular Topics - I would add a feature to the API and the app screen (where the user fetches random messages) that would show the most popular topics that people write about. As a suggestion of what to look for.
 
