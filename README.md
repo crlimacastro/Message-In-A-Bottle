@@ -48,7 +48,7 @@ Profanity Filtering - This would probably have to be brought in as an external d
 
 ## Above and beyond
 
-Automation of Endpoints - As suggested, I created a basic endpoint making system that automatically looks at the folder structure of the "client" folder and creates all the necessary endpoints for me (instead of having to make one manually for every single file). This sped up development immensely and allowed me to organized and separate concerns in my code better; as I wasn't making extra work for myself when separating my functionalities into different files.
+Automation of Endpoints - As suggested, I created a basic endpoint making system that automatically looks at the folder structure of the "client" folder and creates all the necessary endpoints for me (instead of having to make one manually for every single file). This sped up development immensely and allowed me to organize and separate concerns in my code better; as I wasn't making extra work for myself when separating my functionalities into different files.
 
 Responsive Web Design - The site is styled to work well on both computer and phone screens.
 
